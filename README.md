@@ -3,6 +3,44 @@
 ScalaJS wrapper for [react-native](https://facebook.github.io/react-native/) , as react-native depends on [reactjs](http://facebook.github.io/react/), scalajs-react-native depends on [scalajs-react](https://github.com/japgolly/scalajs-react)
 
 
+## Documentation : 
+
+scalajs-react-native comes with ReactNativeComponentB (its clone of  ReactComponentB with native dependencies and extra helper method ).
+
+#### Defining Components :
+
+to define components just follow ReactComponentB guide lines
+
+example : 
+
+```scala
+ val HelloNative = ReactNativeComponentB[Unit]("HelloNative")
+    .render(P => {
+    View(style = styles.container)(
+       Text(style = styles.text)("Welcome to Scala-JS ReactNative"),
+       Text(style = styles.text)("To get started, edit HelloNative.scala ")
+    )
+  }).buildU
+
+```
+
+#### Defining Root Component : 
+
+to define root component use buildNative method from builder
+
+example : 
+
+```scala
+
+  val ScalaJSReactNative = ReactNativeComponentB[Unit]("ScalaJSReactNative")
+      .render((P) => {
+        HelloNative()
+    }).buildNative
+
+    ReactNative.AppRegistry.registerComponent("ScalaJSReactNative", () => ScalaJSReactNative)
+    
+```
+
 ### Status:
 Its still in pre-alpha stage ,play with it, discuss about issues and send PR's if possible :)
 
@@ -75,42 +113,4 @@ sbt ~genReactFile
  
  Cmd+Shift+K - to cleanup
 
-```
-
-## Documentation : 
-
-scalajs-react-native comes with ReactNativeComponentB (its clone of  ReactComponentB with native dependencies and extra helper method ).
-
-#### Defining Components :
-
-to define components just follow ReactComponentB guide lines
-
-example : 
-
-```scala
- val HelloNative = ReactNativeComponentB[Unit]("HelloNative")
-    .render(P => {
-    View(style = styles.container)(
-       Text(style = styles.text)("Welcome to Scala-JS ReactNative"),
-       Text(style = styles.text)("To get started, edit HelloNative.scala ")
-    )
-  }).buildU
-
-```
-
-#### Defining Root Component : 
-
-to define root component use buildNative method from builder
-
-example : 
-
-```scala
-
-  val ScalaJSReactNative = ReactNativeComponentB[Unit]("ScalaJSReactNative")
-      .render((P) => {
-        HelloNative()
-    }).buildNative
-
-    ReactNative.AppRegistry.registerComponent("ScalaJSReactNative", () => ScalaJSReactNative)
-    
 ```
