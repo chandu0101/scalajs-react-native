@@ -1,0 +1,37 @@
+package chandu0101.scalajs.rn.components
+
+import scala.scalajs.js
+import scala.scalajs.js.annotation.JSName
+import scala.scalajs.js.{Array => JArray, UndefOr}
+
+/**
+ * Created by chandrasekharkode on 4/1/15.
+ */
+class ListViewDataSource extends js.Object {
+
+  def this(params: js.Object) = this()
+
+  def cloneWithRows[T](dataBlob: JArray[T], rowIdentities: JArray[String] = ???): ListViewDataSource = js.native
+
+  @JSName("cloneWithRows")
+  def cloneWithRowsWithObject(dataBlob: js.Dictionary[Any], rowIdentities: JArray[String] = ???): ListViewDataSource = js.native
+
+  def cloneWithRowsAndSections(dataBlob: Any, sectionIdentities: JArray[String] = ???, rowIdentities: JArray[JArray[String]]): ListViewDataSource = js.native
+
+  def getRowCount(): Int = js.native
+
+  def rowShouldUpdate(sectionIndex: Int, rowIndex: Int): Boolean = js.native
+
+  def getRowData(sectionIndex: Int, rowIndex: Int): js.Dynamic = js.native
+
+  def getRowIDForFlatIndex(index: Int): UndefOr[String] = js.native
+
+  def getSectionIDForFlatIndex(index: Int): UndefOr[String] = js.native
+
+  def getSectionLengths(): JArray[Int] = js.native
+
+  def sectionHeaderShouldUpdate(sectionIndex: Int): Boolean = js.native
+
+  def getSectionHeaderData(sectionIndex: Int): js.Dynamic = js.native
+
+}

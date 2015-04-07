@@ -1,0 +1,33 @@
+package chandu0101.scalajs.rn.apis
+
+import scala.scalajs.js
+import scala.scalajs.js.UndefOr
+
+/**
+ * Created by chandrasekharkode on 4/2/15.
+ */
+trait PushNotificationIOS extends js.Object {
+
+  def setApplicationIconBadgeNumber(number: Int): Unit = js.native
+
+  def getApplicationIconBadgeNumber(callback: js.Function): Unit = js.native
+
+  def addEventListener(tpe: String, handler: js.Function): Unit = js.native
+
+  def removeEventListener(tpe: String, handler: js.Function): Unit = js.native
+
+  def requestPermissions(): Unit = js.native
+
+  def popInitialNotification(): js.Dynamic = js.native
+
+  def checkPermissions(callback: js.Function): Unit = js.native
+
+  def getSound(): UndefOr[String] = js.native
+
+  def getAlert(): UndefOr[js.Dynamic] = js.native
+
+  def getData(): UndefOr[js.Dynamic] = js.native
+
+  def getBadgeCount(): UndefOr[Int] = js.native
+
+}
