@@ -11,9 +11,8 @@ import scala.scalajs.js.Object
  */
 trait ReactNative extends js.Object {
 
-  //  type TopNode = dom.html.Element
 
-  //componenets
+  //components
   val Text: js.Object = js.native
   val View: js.Object = js.native
   val TextInput: js.Object = js.native

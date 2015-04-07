@@ -6,7 +6,7 @@ import japgolly.scalajs.react._
 import scala.scalajs.js.{Any => JAny, Dynamic, ThisFunction, UndefOr, undefined}
 
 /**
- * Created by chandrasekharkode on 4/1/15.
+ * scalajs-react ReactComponenetB with react-native dependencies
  */
 object ReactNativeComponentB {
 
