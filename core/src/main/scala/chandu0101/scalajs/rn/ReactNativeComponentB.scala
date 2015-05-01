@@ -3,6 +3,7 @@ package chandu0101.scalajs.rn
 import chandu0101.scalajs.rn.ReactNativeComponentB.LifeCycle
 import japgolly.scalajs.react._
 
+import scala.scalajs.js
 import scala.scalajs.js.{Any => JAny, Dynamic, ThisFunction, UndefOr, undefined}
 
 /**
@@ -211,6 +212,9 @@ final class ReactNativeComponentB[P, S, B](val name: String,
 
     def build: C =
       cc(ReactNative.createFactory(ReactNative.createClass(buildSpec)))
+
+    def buildP(props : js.Any)  =
+      ReactNative.createClass(buildSpec.asInstanceOf[js.Dynamic].updateDynamic("props")(props).asInstanceOf[ReactComponentSpec[P, S, B, N]])
 
     /**
      * use this for root component of native app ( passed to AppRegistry.registerComponent(.. )

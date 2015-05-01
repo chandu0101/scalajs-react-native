@@ -7,7 +7,7 @@ import scala.scalajs.js
 import scala.scalajs.js.{UndefOr, undefined}
 
 /**
- * Created by chandrasekharkode on 4/1/15.
+ *
  *
  *
 key: PropTypes.string,

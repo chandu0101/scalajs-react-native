@@ -1,11 +1,37 @@
-# scalajs-react-native
+#scalajs-react-native
+ScalaJS wrapper for [react-native](https://facebook.github.io/react-native/) .This project depends on [scalajs-react](https://github.com/japgolly/scalajs-react) , so you must be familiar with scalajs-react in order to use this library.
 
-ScalaJS wrapper for [react-native](https://facebook.github.io/react-native/) , as react-native depends on [reactjs](http://facebook.github.io/react/), scalajs-react-native depends on [scalajs-react](https://github.com/japgolly/scalajs-react)
+![movies](examples/images/movies.gif) 
 
 
-## Documentation : 
+#Index 
 
-scalajs-react-native comes with ReactNativeComponentB (its clone of  ReactComponentB with native dependencies and extra helper method ).
+- [Setup](#setup)
+- [Styles](#styles)
+- [Examples](#examples)
+- [Project Template](#template)
+
+#Setup
+
+add this to your sbt build file
+
+```scala
+
+libraryDependencies += "com.github.chandu0101.scalajs-react-native" %%% "core" % "0.0.1"
+
+```
+
+imports 
+
+```scala
+import chandu0101.scalajs.rn._ // to import core builderReactNativeComponentB etc 
+import chandu0101.scalajs.rn.components._ // for all native components
+import chandu0101.scalajs.rn.apis._ // for native API calls
+
+
+```
+
+scalajs-react-native comes with ReactNativeComponentB (its clone of scalajs-react ReactComponentB with native dependencies and extra helper methods ).
 
 #### Defining Components :
 
@@ -26,7 +52,7 @@ example :
 
 #### Defining Root Component : 
 
-to define root component use buildNative method from builder
+to define root component use buildNative method from builder .
 
 example : 
 
@@ -35,72 +61,76 @@ example :
   val ScalaJSReactNative = ReactNativeComponentB[Unit]("ScalaJSReactNative")
       .render((P) => {
         HelloNative()
-    }).buildNative
+    }).buildNative //If your component is going to be render by other third party component then use buildNative
 
     ReactNative.AppRegistry.registerComponent("ScalaJSReactNative", () => ScalaJSReactNative)
     
 ```
 
-### Status:
-Its still in pre-alpha stage ,play with it, discuss about issues and send PR's if possible :)
 
+#Styles
 
-### How to use it in projects :
+React Native doesn't implement CSS but instead relies on JavaScript to let you style your application. You can define styles in dynamic/typesafe way 
 
-```scala
-
-// clone  project
-
-git clone https://github.com/chandu0101/scalajs-react-native
-
-//pulishLocal
-
-cd scalajs-react-native
-
-sbt publishLocal
-
-// use it in your projects (add to your build.sbt)
-
-val scalajsReactNativeVersion = "0.1.0-SNAPSHOT"
-
-libraryDependencies += "com.chandu0101.scalajs-react-native" %%% "core" % scalajsReactNativeVersion
-
-// thanks to @gzmo for genReactFile task 
-val genReactFile = Def.taskKey[File]("Generate the file given to react native")
-
-artifactPath in Compile in genReactFile :=
-  baseDirectory.value / "index.ios.js"
-
-genReactFile in Compile := {
-  val outFile = (artifactPath in Compile in genReactFile).value
-
-  IO.copyFile((fullOptJS in Compile).value.data, outFile)
-
-  val launcher = (scalaJSLauncher in Compile).value.data.content
-  IO.append(outFile, launcher)
-
-  outFile
-}
-
-
-// run genReactFile task 
-
-sbt ~genReactFile
-
-// Happy Coding :) 
-
-```
-
-### How to run examples : 
+##### Dynamic Way :
+ 
+ Use js.Dynamic.literal to define js styles
+ 
+Example : 
 
 ```scala
+ import scala.scalajs.js.Dynamic.{literal => json}
+  val styles = ReactNative.StyleSheet.create(
+    json(
+      container = json(flex = 1,
+        backgroundColor = "#F5FCFF"),
+      textCenter = json(textAlign = "center",marginTop = 10)
+    )
+  )
+  
+  //access styles 
+   View(style = styles.container)(..)
+```  
 
+###### TypeSafe Way :  
+
+ In order to define styles in type safe manner you need styles module
+ 
+ ```scala
+ libraryDependencies += "com.github.chandu0101.scalajs-react-native" %%% "styles" % "0.0.1"
+ 
+ ```
+ 
+ extend ``trait NativeStyleSheet`` to define style sheets . NativeStyleSheet comes with two methods ``style`` (which takes attr value pairs)and ``styleE`` (this is used to extend already defined styles).
+ 
+ Example : 
+ 
+```scala 
+  object styles extends NativeStyleSheet {
+    val centering = style(
+      alignItems.center,
+      justifyContent.center
+    )
+    val gray = style(backgroundColor := "#cccccc")
+    val horizontal = style(flexDirection.row, justifyContent.center)
+    val default = styleE(centering, gray)(height := 40)
+  }
+  
+ ```
+  
+#Examples
+
+Number of examples can be found in [examples](https://github.com/chandu0101/scalajs-react-native/tree/master/examples) module
+
+#### How to run examples :
+
+```scala
  cd examples
- 
  // start react-native package
- 
+ npm install
  npm run start 
  
+// open new terminal tab/window
  sbt ~genReactFile
  
  Open ScalaJSReactNative.xcodeproj using xcode
@@ -114,3 +144,11 @@ sbt ~genReactFile
  Cmd+Shift+K - to cleanup
 
 ```
+
+#Template
+
+A basic scalajs-react-native skeleton app can be found here
+
+https://github.com/chandu0101/scalajs-react-native-template
+
+

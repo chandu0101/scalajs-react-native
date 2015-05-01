@@ -2,9 +2,7 @@ package chandu0101.scalajs.rn.apis
 
 import scala.scalajs.js
 
-/**
- * Created by chandrasekharkode on 4/1/15.
- */
+
 trait Animation extends js.Object {
 
   def startAnimation(node : Any,duration : Int,delay : Int,easing : String,properties : js.Dictionary[Any]):Int = js.native

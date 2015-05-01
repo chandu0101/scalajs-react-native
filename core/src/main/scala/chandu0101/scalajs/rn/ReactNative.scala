@@ -6,9 +6,6 @@ import japgolly.scalajs.react._
 import scala.scalajs.js
 import scala.scalajs.js.Object
 
-/**
- * Created by chandrasekharkode on 3/31/15.
- */
 trait ReactNative extends js.Object {
 
 
@@ -41,11 +38,11 @@ trait ReactNative extends js.Object {
   val StyleSheet: StyleSheet = js.native
   val Animation: Animation = js.native
   val AppStateIOS: AppStateIOS = js.native
-  val AsyncStorage: AsyncStorage = js.native
+  val AsyncStorage: AsyncStorageJS = js.native
   val CameraRoll: CameraRoll = js.native
   val InteractionManager: InteractionManager = js.native
   val LinkingIOS: LinkingIOS = js.native
-  val NetInfo: js.Dynamic = js.native
+  val NetInfo: NetInfo = js.native
   val LayoutAnimation: js.Dynamic = js.native
   val PixelRatio: PixelRatio = js.native
   val PushNotificationIOS: PushNotificationIOS = js.native

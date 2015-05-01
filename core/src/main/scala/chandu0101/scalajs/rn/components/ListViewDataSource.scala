@@ -7,16 +7,17 @@ import scala.scalajs.js.{Array => JArray, UndefOr}
 /**
  * Created by chandrasekharkode on 4/1/15.
  */
-class ListViewDataSource extends js.Object {
+@JSName("ListViewDataSource")
+class ListViewDataSource[T] extends js.Object {
 
   def this(params: js.Object) = this()
 
-  def cloneWithRows[T](dataBlob: JArray[T], rowIdentities: JArray[String] = ???): ListViewDataSource = js.native
+  def cloneWithRows(dataBlob: JArray[T], rowIdentities: JArray[String] = ???): ListViewDataSource[T] = js.native
 
   @JSName("cloneWithRows")
-  def cloneWithRowsWithObject(dataBlob: js.Dictionary[Any], rowIdentities: JArray[String] = ???): ListViewDataSource = js.native
+  def cloneWithRowsWithObject(dataBlob: js.Dictionary[Any], rowIdentities: JArray[String] = ???): ListViewDataSource[T] = js.native
 
-  def cloneWithRowsAndSections(dataBlob: Any, sectionIdentities: JArray[String] = ???, rowIdentities: JArray[JArray[String]]): ListViewDataSource = js.native
+  def cloneWithRowsAndSections(dataBlob: Any, sectionIdentities: JArray[String] = ???, rowIdentities: JArray[JArray[String]] = ???): ListViewDataSource[T] = js.native
 
   def getRowCount(): Int = js.native
 

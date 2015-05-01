@@ -3,9 +3,7 @@ package chandu0101.scalajs.rn.apis
 import scala.scalajs.js
 import scala.scalajs.js.UndefOr
 
-/**
- * Created by chandrasekharkode on 4/2/15.
- */
+
 trait PushNotificationIOS extends js.Object {
 
   def setApplicationIconBadgeNumber(number: Int): Unit = js.native

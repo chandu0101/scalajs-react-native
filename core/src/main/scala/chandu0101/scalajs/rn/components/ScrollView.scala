@@ -1,7 +1,5 @@
 package chandu0101.scalajs.rn.components
 
-import chandu0101.scalajs
-import chandu0101.scalajs.rn
 import chandu0101.scalajs.rn.ReactNative
 import japgolly.scalajs.react.{ReactComponentU_, ReactNode}
 
@@ -12,9 +10,9 @@ import scala.scalajs.js.{UndefOr, undefined}
  * Created by chandrasekharkode on 4/1/15.
  *
  * key:PropTypes.string,
-style:PropTypes.Dynamic
+style:PropTypes.Any
 automaticallyAdjustContentInsets: PropTypes.bool,
-    contentInset: EdgeInsetsPropType,
+    contentInset: EdgeInsets,
     contentOffset: PointPropType,
     onScroll: PropTypes.func,
     onScrollAnimationEnd: PropTypes.func,
@@ -42,20 +40,21 @@ automaticallyAdjustContentInsets: PropTypes.bool,
 
 
 case class ScrollView(zoomScale : UndefOr[Int] = undefined,
-                      contentContainerStyle : UndefOr[js.Dynamic] = undefined,
+                      contentContainerStyle : UndefOr[js.Any] = undefined,
                       alwaysBounceVertical : UndefOr[Boolean]=undefined,
                       decelerationRate : UndefOr[Int] = undefined,
                       minimumZoomScale : UndefOr[Int] = undefined,
                       scrollsToTop : UndefOr[Boolean]=undefined,
                       keyboardDismissMode : UndefOr[String] = undefined,
-                      style : UndefOr[js.Dynamic] = undefined,
+                      style : UndefOr[js.Any] = undefined,
                       horizontal : UndefOr[Boolean]=undefined,
                       centerContent : UndefOr[Boolean]=undefined,
                       removeClippedSubviews : UndefOr[Boolean]=undefined,
-                      onScroll : UndefOr[js.Function] = undefined ,
+                      onScroll : UndefOr[() => _] = undefined ,
                       throttleScrollCallbackMS : UndefOr[Int] = undefined,
                       showsHorizontalScrollIndicator : UndefOr[Boolean]=undefined,
                       key : UndefOr[String] = undefined,
+                      contentInset : UndefOr[EdgeInsets] = undefined,
                       scrollEnabled : UndefOr[Boolean]=undefined,
                       alwaysBounceHorizontal : UndefOr[Boolean]=undefined,
                       maximumZoomScale : UndefOr[Int] = undefined,
@@ -84,6 +83,7 @@ case class ScrollView(zoomScale : UndefOr[Int] = undefined,
     showsHorizontalScrollIndicator.foreach(v => p.updateDynamic("showsHorizontalScrollIndicator")(v))
     key.foreach(v => p.updateDynamic("key")(v))
     scrollEnabled.foreach(v => p.updateDynamic("scrollEnabled")(v))
+    contentInset.foreach(v => p.updateDynamic("contentInset")(if(v != null) v.toJson else null))
     alwaysBounceHorizontal.foreach(v => p.updateDynamic("alwaysBounceHorizontal")(v))
     maximumZoomScale.foreach(v => p.updateDynamic("maximumZoomScale")(v))
     automaticallyAdjustContentInsets.foreach(v => p.updateDynamic("automaticallyAdjustContentInsets")(v))
@@ -99,5 +99,10 @@ case class ScrollView(zoomScale : UndefOr[Int] = undefined,
     val f = ReactNative.createFactory(ReactNative.ScrollView)
     f(toJS,children.toJsArray).asInstanceOf[ReactComponentU_]
   }
+}
+
+trait ScrollViewM extends js.Object {
+
+  def scrollTo(destY : Double = 0,destX : Double = 0) : Unit = js.native
 }
      

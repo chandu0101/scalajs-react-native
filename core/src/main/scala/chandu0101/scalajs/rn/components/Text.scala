@@ -20,8 +20,8 @@ style: PropTypes.Dynamic,
  */
 
 case class Text(suppressHighlighting: UndefOr[Boolean] = undefined,
-                onPress: UndefOr[js.Function] = undefined,
-                style: UndefOr[js.Dynamic] = undefined,
+                onPress: UndefOr[() => _] = undefined,
+                style: UndefOr[js.Any] = undefined,
                 numberOfLines: UndefOr[Int] = undefined,
                 key: UndefOr[String] = undefined,
                 testID: UndefOr[String] = undefined) {

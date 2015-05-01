@@ -1,7 +1,5 @@
 package chandu0101.scalajs.rn.components
 
-import chandu0101.scalajs
-import chandu0101.scalajs.rn
 import chandu0101.scalajs.rn.ReactNative
 import japgolly.scalajs.react.{ReactComponentU_, ReactNode}
 

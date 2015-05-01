@@ -1,9 +1,7 @@
 package chandu0101.scalajs.rn.components
 
-import chandu0101.scalajs
-import chandu0101.scalajs.rn
 import chandu0101.scalajs.rn.ReactNative
-import japgolly.scalajs.react.{ReactComponentU_, ReactNode}
+import japgolly.scalajs.react.ReactComponentU_
 
 import scala.scalajs.js
 import scala.scalajs.js.{UndefOr, undefined}
@@ -12,7 +10,7 @@ import scala.scalajs.js.{UndefOr, undefined}
  * Created by chandrasekharkode on 4/1/15.
  *
  * key: PropTypes.string,
-   style: PropTypes.object,
+   style: PropTypes.Any,
     value: PropTypes.number,
     minimumValue: PropTypes.number,
     maximumValue: PropTypes.number,
@@ -21,15 +19,15 @@ import scala.scalajs.js.{UndefOr, undefined}
  */
 
 
-case class SliderIOS(style : UndefOr[js.Object] = undefined,
-                     minimumValue : UndefOr[Int] = undefined,
-                     onSlidingComplete : UndefOr[js.Function] = undefined ,
-                     key : UndefOr[String] = undefined,
-                     onValueChange : UndefOr[js.Function] = undefined ,
-                     value : UndefOr[Int] = undefined,
-                     maximumValue : UndefOr[Int] = undefined) {
+object SliderIOS {
 
-  def toJS = {
+  def apply(style: UndefOr[js.Any] = undefined,
+            minimumValue: UndefOr[Int] = undefined,
+            onSlidingComplete: UndefOr[js.Function] = undefined,
+            key: UndefOr[String] = undefined,
+            onValueChange: UndefOr[(Double) => _] = undefined,
+            value: UndefOr[Int] = undefined,
+            maximumValue: UndefOr[Int] = undefined) = {
     val p = js.Dynamic.literal()
     style.foreach(v => p.updateDynamic("style")(v))
     minimumValue.foreach(v => p.updateDynamic("minimumValue")(v))
@@ -38,12 +36,8 @@ case class SliderIOS(style : UndefOr[js.Object] = undefined,
     onValueChange.foreach(v => p.updateDynamic("onValueChange")(v))
     value.foreach(v => p.updateDynamic("value")(v))
     maximumValue.foreach(v => p.updateDynamic("maximumValue")(v))
-    p
-  }
-
-  def apply(children : ReactNode*) = {
     val f = ReactNative.createFactory(ReactNative.SliderIOS)
-    f(toJS,children.toJsArray).asInstanceOf[ReactComponentU_]
+    f(p).asInstanceOf[ReactComponentU_]
   }
 }
      

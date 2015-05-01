@@ -1,7 +1,5 @@
 package chandu0101.scalajs.rn.components
 
-import chandu0101.scalajs
-import chandu0101.scalajs.rn
 import chandu0101.scalajs.rn.ReactNative
 import japgolly.scalajs.react.{ReactComponentU_, ReactNode}
 
@@ -14,15 +12,15 @@ import scala.scalajs.js.{UndefOr, undefined}
 
 
 
-case class PickerIOS(key : UndefOr[String] = undefined,
-                     onValueChange : UndefOr[js.Function] = undefined ,
-                     selectedValue : UndefOr[js.Object] = undefined) {
+case class PickerIOS[T](key : UndefOr[String] = undefined,
+                     onValueChange : UndefOr[(T) => _] = undefined ,
+                     selectedValue : UndefOr[T] = undefined) {
 
   def toJS = {
     val p = js.Dynamic.literal()
     key.foreach(v => p.updateDynamic("key")(v))
     onValueChange.foreach(v => p.updateDynamic("onValueChange")(v))
-    selectedValue.foreach(v => p.updateDynamic("selectedValue")(v))
+    selectedValue.foreach(v => p.updateDynamic("selectedValue")(if(v.isInstanceOf[Int]) v.asInstanceOf[Int] else v.toString))
     p
   }
 

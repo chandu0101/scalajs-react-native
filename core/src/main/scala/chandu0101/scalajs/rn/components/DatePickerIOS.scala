@@ -1,7 +1,7 @@
 package chandu0101.scalajs.rn.components
 
 import chandu0101.scalajs.rn.ReactNative
-import japgolly.scalajs.react.{ReactComponentU_, ReactNode}
+import japgolly.scalajs.react.ReactComponentU_
 
 import scala.scalajs.js
 import scala.scalajs.js.{UndefOr, undefined}
@@ -20,16 +20,16 @@ import scala.scalajs.js.{UndefOr, undefined}
  */
 
 
-case class DatePickerIOS(timeZoneOffsetInMinutes: UndefOr[Int] = undefined,
-                         key: UndefOr[String] = undefined,
-                         date: js.Date,
-                         minuteInterval: UndefOr[Int] = undefined,
-                         mode: UndefOr[String] = undefined,
-                         minimumDate: UndefOr[js.Date] = undefined,
-                         maximumDate: UndefOr[js.Date] = undefined,
-                         onDateChange: js.Function) {
+object DatePickerIOS {
 
-  def toJS = {
+  def apply(timeZoneOffsetInMinutes: UndefOr[Int] = undefined,
+            key: UndefOr[String] = undefined,
+            date: js.Date,
+            minuteInterval: UndefOr[Int] = undefined,
+            mode: UndefOr[String] = undefined,
+            minimumDate: UndefOr[js.Date] = undefined,
+            maximumDate: UndefOr[js.Date] = undefined,
+            onDateChange: (js.Date) => _)= {
     val p = js.Dynamic.literal()
     timeZoneOffsetInMinutes.foreach(v => p.updateDynamic("timeZoneOffsetInMinutes")(v))
     key.foreach(v => p.updateDynamic("key")(v))
@@ -39,12 +39,9 @@ case class DatePickerIOS(timeZoneOffsetInMinutes: UndefOr[Int] = undefined,
     minimumDate.foreach(v => p.updateDynamic("minimumDate")(v))
     maximumDate.foreach(v => p.updateDynamic("maximumDate")(v))
     p.updateDynamic("onDateChange")(onDateChange)
-    p
-  }
 
-  def apply(children: ReactNode*) = {
     val f = ReactNative.createFactory(ReactNative.DatePickerIOS)
-    f(toJS, children.toJsArray).asInstanceOf[ReactComponentU_]
+    f(p).asInstanceOf[ReactComponentU_]
   }
 }
      

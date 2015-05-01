@@ -1,6 +1,5 @@
 package chandu0101.scalajs.rn.components
 
-import chandu0101.scalajs.rn
 import chandu0101.scalajs.rn._
 import japgolly.scalajs.react.{ReactComponentU_, ReactNode}
 
@@ -15,6 +14,7 @@ import scala.scalajs.js.{UndefOr, undefined}
  * key: PropTypes.string,
    style: PropTypes.object,
    activeOpacity: PropTypes.number,
+   animationVelocity: PropTypes.number,
    underlayColor: PropTypes.string,
    onPress: PropTypes.func,
    onPressIn: PropTypes.func,
@@ -23,16 +23,18 @@ import scala.scalajs.js.{UndefOr, undefined}
  */
 
 
-case class TouchableHighlight(onPressIn: UndefOr[js.Function] = undefined,
-                              onPress: UndefOr[js.Function] = undefined,
-                              style: UndefOr[js.Object] = undefined,
-                              onPressOut: UndefOr[js.Function] = undefined,
-                              key: UndefOr[String] = undefined,
-                              onLongPress: UndefOr[js.Function] = undefined,
-                              underlayColor: UndefOr[String] = undefined,
-                              activeOpacity: UndefOr[Int] = undefined) {
+object TouchableHighlight {
 
-  def toJS = {
+
+  def apply(onPressIn: UndefOr[js.Function] = undefined,
+            onPress: UndefOr[() => _] = undefined,
+            style: UndefOr[js.Any] = undefined,
+            onPressOut: UndefOr[js.Function] = undefined,
+            key: UndefOr[String] = undefined,
+            onLongPress: UndefOr[js.Function] = undefined,
+            underlayColor: UndefOr[String] = undefined,
+            activeOpacity: UndefOr[Int] = undefined,
+            animationVelocity: UndefOr[Int] = undefined)(children: ReactNode = null) = {
     val p = js.Dynamic.literal()
     onPressIn.foreach(v => p.updateDynamic("onPressIn")(v))
     onPress.foreach(v => p.updateDynamic("onPress")(v))
@@ -42,12 +44,10 @@ case class TouchableHighlight(onPressIn: UndefOr[js.Function] = undefined,
     onLongPress.foreach(v => p.updateDynamic("onLongPress")(v))
     underlayColor.foreach(v => p.updateDynamic("underlayColor")(v))
     activeOpacity.foreach(v => p.updateDynamic("activeOpacity")(v))
-    p
-  }
-
-  def apply(children: ReactNode*) = {
+    animationVelocity.foreach(v => p.updateDynamic("animationVelocity")(v))
     val f = ReactNative.createFactory(ReactNative.TouchableHighlight)
-    f(toJS, children.toJsArray).asInstanceOf[ReactComponentU_]
+    if (children != null) f(p, children).asInstanceOf[ReactComponentU_]
+    else f(p).asInstanceOf[ReactComponentU_]
   }
 }
 

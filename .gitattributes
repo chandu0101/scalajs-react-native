@@ -1,3 +1,4 @@
-examples/ios/* linguist-vendored
+examples/iOS/* linguist-vendored
+examples/ScalaJSReactNative.xcodeproj/* linguist-vendored
 examples/node_modules/* linguist-vendored
 examples/index.ios.js linguist-vendored

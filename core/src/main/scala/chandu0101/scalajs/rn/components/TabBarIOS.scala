@@ -1,11 +1,9 @@
 package chandu0101.scalajs.rn.components
 
-import chandu0101.scalajs.rn
 import chandu0101.scalajs.rn._
-import japgolly.scalajs.react.{ReactNode, ReactComponentU_}
+import japgolly.scalajs.react.{ReactComponentU_, ReactNode}
 
 import scala.scalajs.js
-import scala.scalajs.js.{undefined, UndefOr}
 /**
  * Created by chandrasekharkode on 4/1/15.
  */

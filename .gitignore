@@ -18,9 +18,19 @@ project/plugins/project/
 
 #Intellij
 .idea
+*.iml
 
 #mac
 .DS_Store
 
 #project
 examples/js/
+
+#node
+
+node_modules/
+npm-debug.log
+
+
+#ios
+index.ios.js

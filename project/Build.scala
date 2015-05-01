@@ -8,20 +8,15 @@ object ScalajsReactNative extends Build {
 
   val Scala211 = "2.11.6"
 
-
-  val scalajsReactVersion = "0.8.2"
-  
-  val scalajsDOMVersion = "0.8.1-SNAPSHOT"
-
-
+  val scalajsReactVersion = "0.8.4"
 
   type PE = Project => Project
 
   def commonSettings: PE =
     _.enablePlugins(ScalaJSPlugin)
       .settings(
-        organization       := "com.chandu0101.scalajs-react-native",
-        version            := "0.1.0-SNAPSHOT",
+        organization       := "com.github.chandu0101.scalajs-react-native",
+        version            := "0.0.1",
         homepage           := Some(url("https://github.com/chandu0101/scalajs-react-native")),
         licenses           += ("Apache-2.0", url("http://opensource.org/licenses/Apache-2.0")),
         scalaVersion       := Scala211,
@@ -80,7 +75,7 @@ object ScalajsReactNative extends Build {
 
   def useReact(scope: String = "compile"): PE =
     _.settings(
-      libraryDependencies ++= Seq("com.github.japgolly.scalajs-react" %%% "extra" % scalajsReactVersion),
+      libraryDependencies ++= Seq(),
       jsDependencies ++= Seq("org.webjars" % "react" % "0.12.1" % scope / "react-with-addons.js" commonJSName "React"
       ),
       jsDependencies += ProvidedJS / "highlight.pack.js",
@@ -109,9 +104,12 @@ object ScalajsReactNative extends Build {
     (_: Project).settings(s: _*)
   }
 
+  def extModuleName(mname: String): PE =
+    _.settings(name := mname)
+
   // ==============================================================================================
   lazy val root = Project("root", file("."))
-    .aggregate(core, examples)
+    .aggregate(core,styles, examples)
     .configure(commonSettings, preventPublication, addCommandAliases(
       "t"  -> "; test:compile ; test/test",
       "tt" -> ";+test:compile ;+test/test",
@@ -123,14 +121,21 @@ object ScalajsReactNative extends Build {
     .configure(commonSettings, publicationSettings)
     .settings(
       name := "core",
-      libraryDependencies ++= Seq("com.github.japgolly.scalajs-react" %%% "core" % scalajsReactVersion)
-//        "org.scala-js" %%% "scalajs-dom" % scalajsDOMVersion)
+      libraryDependencies ++= Seq("com.github.japgolly.scalajs-react" %%% "core" % scalajsReactVersion,
+        "com.github.japgolly.scalajs-react" %%% "extra" % scalajsReactVersion)
     )
+
+  lazy val styles = project
+    .configure(commonSettings, publicationSettings,extModuleName("styles"))
+
 
 
   // ==============================================================================================
   lazy val examples = project
-    .dependsOn(core)
+    .dependsOn(core,styles)
     .configure(commonSettings,createLauncher(), preventPublication)
+    .settings(
+      libraryDependencies += "org.scala-lang.modules" %% "scala-async" % "0.9.2"
+    )
 
 }

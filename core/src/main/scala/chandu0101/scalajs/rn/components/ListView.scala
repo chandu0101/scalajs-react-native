@@ -1,7 +1,7 @@
 package chandu0101.scalajs.rn.components
 
 import chandu0101.scalajs.rn.ReactNative
-import japgolly.scalajs.react.{ReactComponentU_, ReactNode}
+import japgolly.scalajs.react.ReactComponentU_
 
 import scala.scalajs.js
 import scala.scalajs.js.{UndefOr, undefined}
@@ -10,7 +10,8 @@ import scala.scalajs.js.{UndefOr, undefined}
  * Created by chandrasekharkode on 4/1/15.
  *
  * key:PropTypes.string,
-style:PropTypes.object,
+   ref:PropTypes.string,
+style:PropTypes.Any,
 automaticallyAdjustContentInsets: PropTypes.bool,
     contentInset: EdgeInsetsPropType,
     contentOffset: PointPropType,
@@ -51,63 +52,94 @@ dataSource: PropTypes.iListViewDataSource.isRequired,
  */
 
 
-case class ListView(zoomScale: UndefOr[Int] = undefined,
-                    contentContainerStyle: UndefOr[js.Object] = undefined,
-                    alwaysBounceVertical: UndefOr[Boolean] = undefined,
-                    decelerationRate: UndefOr[Int] = undefined,
-                    minimumZoomScale: UndefOr[Int] = undefined,
-                    scrollsToTop: UndefOr[Boolean] = undefined,
-                    keyboardDismissMode: UndefOr[String] = undefined,
-                    style: UndefOr[js.Object] = undefined,
-                    horizontal: UndefOr[Boolean] = undefined,
-                    centerContent: UndefOr[Boolean] = undefined,
-                    removeClippedSubviews: UndefOr[Boolean] = undefined,
-                    onScroll: UndefOr[js.Function] = undefined,
-                    throttleScrollCallbackMS: UndefOr[Int] = undefined,
-                    showsHorizontalScrollIndicator: UndefOr[Boolean] = undefined,
-                    key: UndefOr[String] = undefined,
-                    scrollEnabled: UndefOr[Boolean] = undefined,
-                    alwaysBounceHorizontal: UndefOr[Boolean] = undefined,
-                    maximumZoomScale: UndefOr[Int] = undefined,
-                    automaticallyAdjustContentInsets: UndefOr[Boolean] = undefined,
-                    onScrollAnimationEnd: UndefOr[js.Function] = undefined,
-                    stickyHeaderIndices: UndefOr[js.Array[Int]] = undefined,
-                    keyboardShouldPersistTaps: UndefOr[Boolean] = undefined,
-                    pagingEnabled: UndefOr[Boolean] = undefined,
-                    showsVerticalScrollIndicator: UndefOr[Boolean] = undefined) {
+object ListView {
 
-  def toJS = {
-    val p = js.Dynamic.literal()
-    zoomScale.foreach(v => p.updateDynamic("zoomScale")(v))
-    contentContainerStyle.foreach(v => p.updateDynamic("contentContainerStyle")(v))
-    alwaysBounceVertical.foreach(v => p.updateDynamic("alwaysBounceVertical")(v))
-    decelerationRate.foreach(v => p.updateDynamic("decelerationRate")(v))
-    minimumZoomScale.foreach(v => p.updateDynamic("minimumZoomScale")(v))
-    scrollsToTop.foreach(v => p.updateDynamic("scrollsToTop")(v))
-    keyboardDismissMode.foreach(v => p.updateDynamic("keyboardDismissMode")(v))
-    style.foreach(v => p.updateDynamic("style")(v))
-    horizontal.foreach(v => p.updateDynamic("horizontal")(v))
-    centerContent.foreach(v => p.updateDynamic("centerContent")(v))
-    removeClippedSubviews.foreach(v => p.updateDynamic("removeClippedSubviews")(v))
-    onScroll.foreach(v => p.updateDynamic("onScroll")(v))
-    throttleScrollCallbackMS.foreach(v => p.updateDynamic("throttleScrollCallbackMS")(v))
-    showsHorizontalScrollIndicator.foreach(v => p.updateDynamic("showsHorizontalScrollIndicator")(v))
-    key.foreach(v => p.updateDynamic("key")(v))
-    scrollEnabled.foreach(v => p.updateDynamic("scrollEnabled")(v))
-    alwaysBounceHorizontal.foreach(v => p.updateDynamic("alwaysBounceHorizontal")(v))
-    maximumZoomScale.foreach(v => p.updateDynamic("maximumZoomScale")(v))
-    automaticallyAdjustContentInsets.foreach(v => p.updateDynamic("automaticallyAdjustContentInsets")(v))
-    onScrollAnimationEnd.foreach(v => p.updateDynamic("onScrollAnimationEnd")(v))
-    stickyHeaderIndices.foreach(v => p.updateDynamic("stickyHeaderIndices")(v))
-    keyboardShouldPersistTaps.foreach(v => p.updateDynamic("keyboardShouldPersistTaps")(v))
-    pagingEnabled.foreach(v => p.updateDynamic("pagingEnabled")(v))
-    showsVerticalScrollIndicator.foreach(v => p.updateDynamic("showsVerticalScrollIndicator")(v))
-    p
-  }
 
-  def apply(children: ReactNode*) = {
+  def apply[T](zoomScale: UndefOr[Int] = undefined,
+               scrollRenderAheadDistance: UndefOr[Int] = undefined,
+               renderFooter: UndefOr[() => _] = undefined,
+               contentContainerStyle: UndefOr[js.Object] = undefined,
+               alwaysBounceVertical: UndefOr[Boolean] = undefined,
+               pageSize: UndefOr[Int] = undefined,
+               decelerationRate: UndefOr[Int] = undefined,
+               minimumZoomScale: UndefOr[Int] = undefined,
+               scrollsToTop: UndefOr[Boolean] = undefined,
+               renderHeader: UndefOr[js.Function] = undefined,
+               keyboardDismissMode: UndefOr[String] = undefined,
+               style: UndefOr[js.Any] = undefined,
+               renderRow: (T) => _,
+               horizontal: UndefOr[Boolean] = undefined,
+               centerContent: UndefOr[Boolean] = undefined,
+               removeClippedSubviews: UndefOr[Boolean] = undefined,
+               onEndReachedThreshold: UndefOr[Int] = undefined,
+               onScroll: UndefOr[js.Function] = undefined,
+               dataSource: ListViewDataSource[T],
+               throttleScrollCallbackMS: UndefOr[Int] = undefined,
+               showsHorizontalScrollIndicator: UndefOr[Boolean] = undefined,
+               key: UndefOr[String] = undefined,
+               scrollEnabled: UndefOr[Boolean] = undefined,
+               alwaysBounceHorizontal: UndefOr[Boolean] = undefined,
+               maximumZoomScale: UndefOr[Int] = undefined,
+               onEndReached: UndefOr[() => _] = undefined,
+               automaticallyAdjustContentInsets: UndefOr[Boolean] = undefined,
+               initialListSize: UndefOr[Int] = undefined,
+               onScrollAnimationEnd: UndefOr[js.Function] = undefined,
+               stickyHeaderIndices: UndefOr[js.Array[Int]] = undefined,
+               keyboardShouldPersistTaps: UndefOr[Boolean] = undefined,
+               onChangeVisibleRows: UndefOr[js.Function] = undefined,
+               pagingEnabled: UndefOr[Boolean] = undefined,
+               ref: UndefOr[String] = undefined,
+               renderSectionHeader: UndefOr[(js.Dynamic,js.Dynamic) => js.Object] = undefined,
+               showsVerticalScrollIndicator: UndefOr[Boolean] = undefined) = {
+    def toJS = {
+      val p = js.Dynamic.literal()
+      zoomScale.foreach(v => p.updateDynamic("zoomScale")(v))
+      scrollRenderAheadDistance.foreach(v => p.updateDynamic("scrollRenderAheadDistance")(v))
+      renderFooter.foreach(v => p.updateDynamic("renderFooter")(v))
+      ref.foreach(v => p.updateDynamic("ref")(v))
+      contentContainerStyle.foreach(v => p.updateDynamic("contentContainerStyle")(v))
+      alwaysBounceVertical.foreach(v => p.updateDynamic("alwaysBounceVertical")(v))
+      pageSize.foreach(v => p.updateDynamic("pageSize")(v))
+      decelerationRate.foreach(v => p.updateDynamic("decelerationRate")(v))
+      minimumZoomScale.foreach(v => p.updateDynamic("minimumZoomScale")(v))
+      scrollsToTop.foreach(v => p.updateDynamic("scrollsToTop")(v))
+      renderHeader.foreach(v => p.updateDynamic("renderHeader")(v))
+      keyboardDismissMode.foreach(v => p.updateDynamic("keyboardDismissMode")(v))
+      style.foreach(v => p.updateDynamic("style")(v))
+      p.updateDynamic("renderRow")(renderRow)
+      horizontal.foreach(v => p.updateDynamic("horizontal")(v))
+      centerContent.foreach(v => p.updateDynamic("centerContent")(v))
+      removeClippedSubviews.foreach(v => p.updateDynamic("removeClippedSubviews")(v))
+      onEndReachedThreshold.foreach(v => p.updateDynamic("onEndReachedThreshold")(v))
+      onScroll.foreach(v => p.updateDynamic("onScroll")(v))
+      p.updateDynamic("dataSource")(dataSource)
+      throttleScrollCallbackMS.foreach(v => p.updateDynamic("throttleScrollCallbackMS")(v))
+      showsHorizontalScrollIndicator.foreach(v => p.updateDynamic("showsHorizontalScrollIndicator")(v))
+      key.foreach(v => p.updateDynamic("key")(v))
+      scrollEnabled.foreach(v => p.updateDynamic("scrollEnabled")(v))
+      alwaysBounceHorizontal.foreach(v => p.updateDynamic("alwaysBounceHorizontal")(v))
+      maximumZoomScale.foreach(v => p.updateDynamic("maximumZoomScale")(v))
+      onEndReached.foreach(v => p.updateDynamic("onEndReached")(v))
+      automaticallyAdjustContentInsets.foreach(v => p.updateDynamic("automaticallyAdjustContentInsets")(v))
+      initialListSize.foreach(v => p.updateDynamic("initialListSize")(v))
+      onScrollAnimationEnd.foreach(v => p.updateDynamic("onScrollAnimationEnd")(v))
+      stickyHeaderIndices.foreach(v => p.updateDynamic("stickyHeaderIndices")(v))
+      keyboardShouldPersistTaps.foreach(v => p.updateDynamic("keyboardShouldPersistTaps")(v))
+      onChangeVisibleRows.foreach(v => p.updateDynamic("onChangeVisibleRows")(v))
+      pagingEnabled.foreach(v => p.updateDynamic("pagingEnabled")(v))
+      renderSectionHeader.foreach(v => p.updateDynamic("renderSectionHeader")(v))
+      showsVerticalScrollIndicator.foreach(v => p.updateDynamic("showsVerticalScrollIndicator")(v))
+      p
+    }
     val f = ReactNative.createFactory(ReactNative.ListView)
-    f(toJS, children.toJsArray).asInstanceOf[ReactComponentU_]
+    f(toJS).asInstanceOf[ReactComponentU_]
   }
+
 }
-     
+
+
+trait ListViewM extends js.Object {
+
+  def getScrollResponder(): ScrollViewM = js.native
+
+}

@@ -2,9 +2,7 @@ package chandu0101.scalajs.rn.apis
 
 import scala.scalajs.js
 
-/**
- * Created by chandrasekharkode on 4/1/15.
- */
+
 trait AppRegistry extends js.Object {
 
   def registerConfig(config: js.Array[js.Object]): Unit = js.native
