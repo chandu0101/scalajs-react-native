@@ -1,4 +1,6 @@
 #scalajs-react-native
+
+[![Join the chat at https://gitter.im/chandu0101/scalajs-react-native](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/chandu0101/scalajs-react-native?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 ScalaJS wrapper for [react-native](https://facebook.github.io/react-native/) .This project depends on [scalajs-react](https://github.com/japgolly/scalajs-react) , so you must be familiar with scalajs-react in order to use this library.
 
 ![movies](examples/images/movies.gif) 
