@@ -47,7 +47,6 @@ object MovieScreen {
     .stateless
     .backend(new Backend(_))
     .render((P, S, B) => {
-    println(s" margin pixel ration ${ReactNative.PixelRatio.get()}")
     val movie = B.props.route.passProps
     ScrollView(contentContainerStyle = styles.contentContainer)(
       View(style = styles.mainSection)(

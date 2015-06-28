@@ -36,7 +36,7 @@ object MovieCell {
     .build
 
 
-  case class Props(movie: js.Dynamic, onSelect: () => _)
+  case class Props(movie: js.Dynamic, onSelect: () => Unit)
 
   object styles extends NativeStyleSheet {
     val  textContainer = style(
@@ -71,6 +71,6 @@ object MovieCell {
     )
   }
 
-  def apply(movie: js.Dynamic, onSelect: () => _,key : String = "") = component.withKey(key)(new Props(movie, onSelect))
+  def apply(movie: js.Dynamic, onSelect: () => Unit,key : String = "") = component.withKey(key)(new Props(movie, onSelect))
 
 }

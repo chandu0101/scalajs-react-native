@@ -10,37 +10,44 @@ import scala.scalajs.js.{UndefOr, undefined}
  * Created by chandrasekharkode on 4/2/15.
  *
  *  key: PropTypes.string,
- *  style : PropTypes.Any,
-    onPress: PropTypes.func,
-    onPressIn: PropTypes.func,
-    onPressOut: PropTypes.func,
-    onLongPress: PropTypes.func,
+   style: PropTypes.js.Any,
+   activeOpacity: PropTypes.number,
+   animationVelocity: PropTypes.number,
+   underlayColor: PropTypes.string,
+   onPress: PropTypes.() => Unit,
+   onPressIn: PropTypes.() => Unit,
+   onPressOut: PropTypes.() => Unit,
+   onLongPress: PropTypes.() => Unit,
     activeOpacity:PropTypes.number,
  */
 
-case class TouchableOpacity(onPressIn : UndefOr[() => _] = undefined ,
-                            onPress : UndefOr[() => _] = undefined ,
-                            style : UndefOr[js.Any] = undefined ,
-                            onPressOut : UndefOr[() => _] = undefined ,
-                            key : UndefOr[String] = undefined,
-                            onLongPress : UndefOr[() => _] = undefined ,
-                            activeOpacity : UndefOr[Int] = undefined) {
 
+
+case class TouchableOpacity(onPressIn : js.UndefOr[() => Unit] = js.undefined,
+                            onPress : js.UndefOr[() => Unit] = js.undefined,
+                            style : js.UndefOr[js.Any] = js.undefined,
+                            onPressOut : js.UndefOr[() => Unit] = js.undefined,
+                            key : js.UndefOr[String] = js.undefined,
+                            animationVelocity : js.UndefOr[Int] = js.undefined,
+                            onLongPress : js.UndefOr[() => Unit] = js.undefined,
+                            underlayColor : js.UndefOr[String] = js.undefined,
+                            activeOpacity : js.UndefOr[Int] = js.undefined) {
   def toJS = {
     val p = js.Dynamic.literal()
     onPressIn.foreach(v => p.updateDynamic("onPressIn")(v))
     onPress.foreach(v => p.updateDynamic("onPress")(v))
-    onPressOut.foreach(v => p.updateDynamic("onPressOut")(v))
     style.foreach(v => p.updateDynamic("style")(v))
+    onPressOut.foreach(v => p.updateDynamic("onPressOut")(v))
     key.foreach(v => p.updateDynamic("key")(v))
+    animationVelocity.foreach(v => p.updateDynamic("animationVelocity")(v))
     onLongPress.foreach(v => p.updateDynamic("onLongPress")(v))
+    underlayColor.foreach(v => p.updateDynamic("underlayColor")(v))
     activeOpacity.foreach(v => p.updateDynamic("activeOpacity")(v))
     p
   }
 
-  def apply(child : ReactNode) = {
+  def apply(children : ReactNode*) = {
     val f = ReactNative.createFactory(ReactNative.TouchableOpacity)
-    f(toJS,child).asInstanceOf[ReactComponentU_]
+    f(toJS,children.toJsArray).asInstanceOf[ReactComponentU_]
   }
 }
-     

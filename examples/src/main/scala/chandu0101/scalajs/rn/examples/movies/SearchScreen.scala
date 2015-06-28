@@ -8,10 +8,11 @@ import japgolly.scalajs.react._
 import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 import scala.async.Async._
-import scala.concurrent.ExecutionContext.Implicits.global
+//import scala.concurrent.ExecutionContext.Implicits.global
 import scala.scalajs.js
 import scala.scalajs.js.Dynamic.{literal => json}
 import scala.scalajs.js.{JSON, URIUtils}
+import scala.scalajs.concurrent.JSExecutionContext.Implicits.runNow
 
 
 object SearchScreen {
@@ -113,7 +114,7 @@ object SearchScreen {
     }
 
 
-    def renderRow(movie: js.Dynamic) : Any = {
+    def renderRow(movie: js.Dynamic,sectionID : String, rowID : String) : Any = {
       MovieCell(movie = movie, onSelect = () => selectMovie(movie), key = movie.title.toString)
     }
 
@@ -154,7 +155,7 @@ object SearchScreen {
     .render(P => {
     val (onChnage, onFocus, isLoading) = P
     View(style = styles.searchBar)(
-      TextInput(autoCapitalize = "none", autoCorrect = false,
+      TextInput(autoCapitalize = AutoCapitalize.NONE, autoCorrect = false,
         onChange = onChnage, onFocus = onFocus, placeholder = "Search a movie..", style = styles.searchBarInput
       )(),
       ActivityIndicatorIOS(animating = isLoading, style = styles.spinner)

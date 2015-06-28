@@ -66,6 +66,8 @@ trait ReactNative extends js.Object {
 
 
   val addons: js.Dynamic = js.native
+
+  def findNodeHandle(ref : js.Any):js.Object = js.native
 }
 
 

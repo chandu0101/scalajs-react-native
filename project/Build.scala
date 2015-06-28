@@ -8,7 +8,7 @@ object ScalajsReactNative extends Build {
 
   val Scala211 = "2.11.6"
 
-  val scalajsReactVersion = "0.8.4"
+  val scalajsReactVersion = "0.9.1"
 
   type PE = Project => Project
 
@@ -16,14 +16,13 @@ object ScalajsReactNative extends Build {
     _.enablePlugins(ScalaJSPlugin)
       .settings(
         organization       := "com.github.chandu0101.scalajs-react-native",
-        version            := "0.0.1",
+        version            := "0.0.2-SNAPSHOT",
         homepage           := Some(url("https://github.com/chandu0101/scalajs-react-native")),
         licenses           += ("Apache-2.0", url("http://opensource.org/licenses/Apache-2.0")),
         scalaVersion       := Scala211,
         scalacOptions     ++= Seq("-deprecation", "-unchecked", "-feature",
                                 "-language:postfixOps", "-language:implicitConversions",
-                                "-language:higherKinds", "-language:existentials"),
-        updateOptions      := updateOptions.value.withConsolidatedResolution(true))
+                                "-language:higherKinds", "-language:existentials"))
 
   def preventPublication: PE =
     _.settings(
@@ -127,8 +126,6 @@ object ScalajsReactNative extends Build {
 
   lazy val styles = project
     .configure(commonSettings, publicationSettings,extModuleName("styles"))
-
-
 
   // ==============================================================================================
   lazy val examples = project

@@ -13,6 +13,7 @@ trait NativeAttrs extends FlexBoxStyles with TextStyles with ImageStyles with Vi
 trait FlexBoxStyles {
 
   val flex = new NativeStyle[Double]("flex")
+  val flexOne = flex := 1
 
   val borderBottomWidth = new NativeStyle[Double]("borderBottomWidth")
   val borderLeftWidth = new NativeStyle[Double]("borderLeftWidth")
@@ -39,6 +40,7 @@ trait FlexBoxStyles {
   val right = new NativeStyle[Double]("right")
   val top = new NativeStyle[Double]("top")
   val width = new NativeStyle[Double]("width")
+  val letterSpacing = new NativeStyle[Double]("letterSpacing")
 
   object position extends NativeStyle[String]("position") {
     val absolute = this := "absolute"
@@ -154,10 +156,12 @@ trait ViewStyles {
   val translateX = new NativeStyle[Double]("translateX")
   val translateY = new NativeStyle[Double]("translateY")
   val shadowColor = new NativeStyle[String]("shadowColor")
-  case class ShadowOffset(h : Double, w: Double) {
-    def toJson = json(h = h, w =w )
+  case class ShadowOffset(height : Double, width: Double) {
+    def toJson = json(height = height, width = width )
   }
   val shadowOffset = new NativeStyle[js.Object]("shadowOffset")
   val transformMatrix = new NativeStyle[js.Array[Double]]("transformMatrix")
+  val borderTopLeftRadius = new NativeStyle[Double]("borderTopLeftRadius")
+  val borderTopRightRadius = new NativeStyle[Double]("borderTopRightRadius")
 
 }

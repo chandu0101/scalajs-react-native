@@ -13,13 +13,24 @@ package object rn {
 
   lazy val ReactNative = load[ReactNative]("react-native")
 
+  /**
+   * http://stackoverflow.com/questions/tagged/scala.js
+   * https://github.com/timoxley/to-factory
+   * https://github.com/babel/babel/issues/798
+   */
+  lazy val toFactory = load[js.Dynamic]("to-factory")
 
   type NEvent = js.Dynamic
 
-  def createListViewDataSource[T,H](rowHasChanged: (T, T) => Boolean,sectionHeaderHasChanged: js.UndefOr[(H,H) => Boolean] = js.undefined): ListViewDataSource[T] = {
-    val ListDataSource = ReactNative.ListView.asInstanceOf[js.Dynamic].DataSource
+  def createListViewDataSource[T,H](rowHasChanged: (T, T) => Boolean,
+                                    sectionHeaderHasChanged: js.UndefOr[(H,H) => Boolean] = js.undefined,
+                                    getRowData : js.UndefOr[(_,String,String) => _] = js.undefined,
+                                    getSectionHeaderData : js.UndefOr[(_,String) => _] = js.undefined): ListViewDataSource[T] = {
+    val ListDataSource = toFactory(ReactNative.ListView.asInstanceOf[js.Dynamic].DataSource)
     val j = json(rowHasChanged = rowHasChanged)
     sectionHeaderHasChanged.foreach(v => j.updateDynamic("sectionHeaderHasChanged")(v))
+    getRowData.foreach(v => j.updateDynamic("getRowData")(v))
+    getSectionHeaderData.foreach(v => j.updateDynamic("getSectionHeaderData")(v))
     js.Dynamic.newInstance(ListDataSource)(j).asInstanceOf[ListViewDataSource[T]]
   }
 

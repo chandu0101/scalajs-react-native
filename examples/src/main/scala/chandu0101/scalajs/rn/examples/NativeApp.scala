@@ -13,8 +13,8 @@ object NativeApp extends JSApp {
     val ScalaJSReactNative = ReactNativeComponentB[Unit]("ScalaJSReactNative")
       .render((P) => {
 //      HelloNative()
-//      MoviesApp()
-       UIExplorerApp()
+      MoviesApp()
+//       UIExplorerApp()
     }).buildNative
 
     ReactNative.AppRegistry.registerComponent("ScalaJSReactNative", () => ScalaJSReactNative)

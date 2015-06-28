@@ -7,7 +7,7 @@ import scala.scalajs.js.{UndefOr, undefined}
 
 
 case class NavigatorIOSRoute(onRightButtonPress: UndefOr[js.Function] = undefined,
-                             passProps: UndefOr[js.Object] = undefined,
+                             passProps: UndefOr[js.Any] = undefined,
                              rightButtonTitle: UndefOr[String] = undefined,
                              wrapperStyle: UndefOr[js.Object] = undefined,
                              backButtonTitle: UndefOr[String] = undefined,

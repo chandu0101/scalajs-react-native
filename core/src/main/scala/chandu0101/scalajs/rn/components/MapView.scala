@@ -83,7 +83,7 @@ object MapViewRegion {
 case class MapViewAnnotation(latitude: Double, longitude: Double, title: UndefOr[String] = undefined, subTitle: UndefOr[String] = undefined) {
   def toJson = {
     val p = json()
-    subTitle.foreach(v => p.updateDynamic("subTitle")(v))
+    subTitle.foreach(v => p.updateDynamic("subtitle")(v))
     p.updateDynamic("latitude")(latitude)
     title.foreach(v => p.updateDynamic("title")(v))
     p.updateDynamic("longitude")(longitude)
@@ -92,7 +92,7 @@ case class MapViewAnnotation(latitude: Double, longitude: Double, title: UndefOr
 }
 
 object MapViewAnnotation {
-  def fromJson(obj: js.Dynamic) = MapViewAnnotation(subTitle = if (js.isUndefined(obj.subTitle)) js.undefined else obj.subTitle.asInstanceOf[String],
+  def fromJson(obj: js.Dynamic) = MapViewAnnotation(subTitle = if (js.isUndefined(obj.subtitle)) js.undefined else obj.subtitle.asInstanceOf[String],
     latitude = obj.latitude.asInstanceOf[Double],
     title = if (js.isUndefined(obj.title)) js.undefined else obj.title.asInstanceOf[String],
     longitude = obj.longitude.asInstanceOf[Double])

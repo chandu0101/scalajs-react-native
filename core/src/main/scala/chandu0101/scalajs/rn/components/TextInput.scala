@@ -9,10 +9,10 @@ import scala.scalajs.js.{UndefOr, undefined}
 /**
  * Created by chandrasekharkode on 3/31/15.
  *
- * key: PropTypes.string,
-  ref: PropTypes.string,
-style: PropTypes.js.Any,
-      autoCapitalize: PropTypes.string,
+ *  key: PropTypes.string,
+    ref: PropTypes.string,
+    style: PropTypes.js.Any,
+    autoCapitalize: PropTypes.string,
     autoCorrect: PropTypes.bool,
     autoFocus: PropTypes.bool,
     editable: PropTypes.bool,
@@ -52,10 +52,10 @@ case class TextInput(onBlur : UndefOr[(NEvent) => _] = undefined,
                      onChangeText : UndefOr[(String) => _] = undefined,
                      autoFocus : UndefOr[Boolean]=undefined,
                      autoCorrect : UndefOr[Boolean]=undefined,
-                     autoCapitalize : UndefOr[String] = undefined,
+                     autoCapitalize : UndefOr[AutoCapitalize] = undefined,
                      key : UndefOr[String] = undefined,
                      bufferDelay : UndefOr[Int] = undefined,
-                     onEndEditing : UndefOr[js.Function] = undefined ,
+                     onEndEditing : UndefOr[(NEvent) => _] = undefined ,
                      testID : UndefOr[String] = undefined,
                      controlled : UndefOr[Boolean]=undefined,
                      onFocus : UndefOr[(NEvent) => _] = undefined,
@@ -80,7 +80,7 @@ case class TextInput(onBlur : UndefOr[(NEvent) => _] = undefined,
     onChangeText.foreach(v => p.updateDynamic("onChangeText")(v))
     autoFocus.foreach(v => p.updateDynamic("autoFocus")(v))
     autoCorrect.foreach(v => p.updateDynamic("autoCorrect")(v))
-    autoCapitalize.foreach(v => p.updateDynamic("autoCapitalize")(v))
+    autoCapitalize.foreach(v => p.updateDynamic("autoCapitalize")(v.name))
     key.foreach(v => p.updateDynamic("key")(v))
     bufferDelay.foreach(v => p.updateDynamic("bufferDelay")(v))
     onEndEditing.foreach(v => p.updateDynamic("onEndEditing")(v))
@@ -101,9 +101,28 @@ case class TextInput(onBlur : UndefOr[(NEvent) => _] = undefined,
   }
 }
 
-
+/**
+ *  mounted TextInput component methods
+ */
 trait TextInputM extends js.Object {
 
   def blur() : Unit = js.native
+
+}
+
+
+case  class AutoCapitalize private (name : String) extends AnyVal
+
+object AutoCapitalize {
+
+  val NONE = new AutoCapitalize("none")
+
+  val SENTENCES = new AutoCapitalize("sentences")
+
+  val WORDS = new AutoCapitalize("words")
+
+  val CHARACTERS = new AutoCapitalize("characters")
+
+  def newType(name : String) = new AutoCapitalize(name)
 
 }

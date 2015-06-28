@@ -1,7 +1,7 @@
 package chandu0101.scalajs.rn.mixins
 
 import chandu0101.scalajs.rn
-import japgolly.scalajs.react.extra.OnUnmount
+import chandu0101.scalajs.rn.extras.OnUnmount
 
 import scala.scalajs.js
 
@@ -15,7 +15,7 @@ abstract class TimerMixin extends OnUnmount{
   val timerMixin : TimerMixinJS = rn.load[TimerMixinJS]("react-timer-mixin/TimerMixin")
 
   onUnmount {
-    timerMixin.componentWillUnmount()
+      timerMixin.componentWillUnmount()
   }
 
 }

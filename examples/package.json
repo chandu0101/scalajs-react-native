@@ -1,12 +1,13 @@
 {
   "name": "scalajs-react-native",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "start": "node_modules/react-native/packager/packager.sh"
   },
   "dependencies": {
-    "react-native": "^0.4.0",
-    "react-timer-mixin": "^0.13.1"
+    "react-native": "0.6.0",
+    "react-timer-mixin": "^0.13.1",
+    "to-factory": "^1.0.0"
   }
 }

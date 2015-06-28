@@ -1,7 +1,7 @@
 package chandu0101.scalajs.rn.components
 
 import chandu0101.scalajs.rn.ReactNative
-import japgolly.scalajs.react.ReactComponentU_
+import japgolly.scalajs.react.{ReactElement, ReactComponentU_}
 
 import scala.scalajs.js
 import scala.scalajs.js.{UndefOr, undefined}
@@ -11,7 +11,7 @@ import scala.scalajs.js.{UndefOr, undefined}
  *
  * key:PropTypes.string,
    ref:PropTypes.string,
-style:PropTypes.Any,
+style:PropTypes.js.Any,
 automaticallyAdjustContentInsets: PropTypes.bool,
     contentInset: EdgeInsetsPropType,
     contentOffset: PointPropType,
@@ -49,25 +49,27 @@ dataSource: PropTypes.iListViewDataSource.isRequired,
     scrollRenderAheadDistance:PropTypes.number,
     onChangeVisibleRows: PropTypes.func,
     removeClippedSubviews: PropTypes.bool,
+ renderSeparator:PropTypes.(String,String,Boolean) => ReactElement
  */
 
 
 object ListView {
 
 
-  def apply[T](zoomScale: UndefOr[Int] = undefined,
+  def apply[T,H ](zoomScale: UndefOr[Int] = undefined,
                scrollRenderAheadDistance: UndefOr[Int] = undefined,
                renderFooter: UndefOr[() => _] = undefined,
+               renderSeparator: UndefOr[(String,String,Boolean) => ReactElement] = undefined,
                contentContainerStyle: UndefOr[js.Object] = undefined,
                alwaysBounceVertical: UndefOr[Boolean] = undefined,
                pageSize: UndefOr[Int] = undefined,
                decelerationRate: UndefOr[Int] = undefined,
                minimumZoomScale: UndefOr[Int] = undefined,
                scrollsToTop: UndefOr[Boolean] = undefined,
-               renderHeader: UndefOr[js.Function] = undefined,
+               renderHeader: UndefOr[() => _] = undefined,
                keyboardDismissMode: UndefOr[String] = undefined,
                style: UndefOr[js.Any] = undefined,
-               renderRow: (T) => _,
+               renderRow: (T,String,String) => _,
                horizontal: UndefOr[Boolean] = undefined,
                centerContent: UndefOr[Boolean] = undefined,
                removeClippedSubviews: UndefOr[Boolean] = undefined,
@@ -89,7 +91,7 @@ object ListView {
                onChangeVisibleRows: UndefOr[js.Function] = undefined,
                pagingEnabled: UndefOr[Boolean] = undefined,
                ref: UndefOr[String] = undefined,
-               renderSectionHeader: UndefOr[(js.Dynamic,js.Dynamic) => js.Object] = undefined,
+               renderSectionHeader: UndefOr[(H,H) => js.Object] = undefined,
                showsVerticalScrollIndicator: UndefOr[Boolean] = undefined) = {
     def toJS = {
       val p = js.Dynamic.literal()
@@ -128,6 +130,7 @@ object ListView {
       onChangeVisibleRows.foreach(v => p.updateDynamic("onChangeVisibleRows")(v))
       pagingEnabled.foreach(v => p.updateDynamic("pagingEnabled")(v))
       renderSectionHeader.foreach(v => p.updateDynamic("renderSectionHeader")(v))
+      renderSeparator.foreach(v => p.updateDynamic("renderSeparator")(v))
       showsVerticalScrollIndicator.foreach(v => p.updateDynamic("showsVerticalScrollIndicator")(v))
       p
     }

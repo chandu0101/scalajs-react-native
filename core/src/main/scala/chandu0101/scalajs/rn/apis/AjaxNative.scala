@@ -12,7 +12,7 @@ import scala.scalajs.js
  * Thrown when `Ajax.get` or `Ajax.post` receives a non-20X response code.
  * Contains the XMLHttpRequest that resulted in that response
  */
-case class AjaxException(xhr: XMLHttpRequest) extends Exception {
+case class AjaxNativeException(xhr: XMLHttpRequest) extends Exception {
   def isTimeout = xhr.status == 0 && xhr.readyState == 4
 }
 object AjaxNative {
@@ -63,7 +63,7 @@ object AjaxNative {
         if ((req.status >= 200 && req.status < 300) || req.status == 304)
           promise.success(req)
         else
-          promise.failure(AjaxException(req))
+          promise.failure(AjaxNativeException(req))
       }
     }
     req.open(method, url)

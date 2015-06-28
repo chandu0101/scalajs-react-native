@@ -19,7 +19,7 @@ object PushNotificationIOSExample extends UIExample {
               )
          }).build
 
-  case class ButtonProps(label : String,onPress : () => _)
+  case class ButtonProps(label : String,onPress : () => Unit)
 
   val component = ReactNativeComponentB[Unit]("PushNotificationIOSExample")
     .render(P => {

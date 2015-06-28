@@ -70,7 +70,7 @@ object WebViewExample extends UIExample {
                Text()(">")
              )
            ),
-           TextInput(ref = TEXT_INPUT_REF,autoCapitalize = "none",value = S.url,onSubmitEditing = B.onSubmitEditing _,
+           TextInput(ref = TEXT_INPUT_REF,autoCapitalize = AutoCapitalize.NONE,value = S.url,onSubmitEditing = B.onSubmitEditing _,
              onChange = B.handleTextInputChange _,
              clearButtonMode = "while-editing",
              style = styles.addressBarTextInput)(),

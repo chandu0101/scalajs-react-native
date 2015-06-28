@@ -22,15 +22,18 @@ object UIExplorerList {
     SliderIOSExample,
     ScrollViewExample,
     ActivityIndicatorIOSExample,
-   PickerIOSExample,
-   DatePickerIOSExample,
-  MapViewExample)
+    PickerIOSExample,
+    DatePickerIOSExample,
+    MapViewExample,
+    TextInputExample,
+    ListViewExample,
+    ListViewPagingExample)
 
   val APIS: js.Array[UIExample] = js.Array(AlertIOSExample,
     GeoLocationExample,
     AppStateIOSExample,
     AsyncStorageExample,
-  NetInfoExample)
+    NetInfoExample)
 
   val ds = rn.createListViewDataSource(rowHasChanged = (r1: UIExample, r2: UIExample) => r1 != r2, sectionHeaderHasChanged = (h1: String, h2: String) => h1 != h2)
 
@@ -38,7 +41,7 @@ object UIExplorerList {
 
   class Backend(t: BackendScope[_, State]) {
 
-    def onPressRow(example: UIExample) = {
+    def onPressRow(example: UIExample):Unit = {
       t.propsDynamic.navigator.push(
         NavigatorIOSRoute(title = example.title, component = example.component).toJson
       )
@@ -51,7 +54,7 @@ object UIExplorerList {
       t.modState(_.copy(datasource = ds.cloneWithRowsAndSections(json(componenets = filteredComponents, apis = filteredAPIS))))
     }
 
-    def renderRow(example: UIExample): js.Object = {
+    def renderRow(example: UIExample, sectionID: String, rowId: String): js.Object = {
       View(key = example.title)(
         TouchableHighlight(onPress = () => onPressRow(example))(
           View(style = styles.row)(
@@ -82,7 +85,7 @@ object UIExplorerList {
     .render((P, S, B) => {
     View(style = styles.listContainer)(
       View(style = styles.searchRow)(
-        TextInput(autoCapitalize = "none",
+        TextInput(autoCapitalize = AutoCapitalize.NONE,
           autoCorrect = false,
           clearButtonMode = "always",
           onChangeText = B.handleSearchTextChange _,
