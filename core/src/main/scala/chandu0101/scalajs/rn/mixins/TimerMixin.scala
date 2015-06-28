@@ -1,30 +1,31 @@
 package chandu0101.scalajs.rn.mixins
 
-import chandu0101.scalajs.rn
-import chandu0101.scalajs.rn.extras.OnUnmount
-
+import chandu0101.scalajs.rn.extras.OnUnmountNative
+import org.scalajs.dom
 import scala.scalajs.js
 
 /**
- *  this mixin depends on js module react-timer-mixin
- *   user must add    "react-timer-mixin": " 0.13.1" dependency to package.json
+ * make sure u configure(OnUnMountNative.install)
 
  */
-abstract class TimerMixin extends OnUnmount{
-  
-  val timerMixin : TimerMixinJS = rn.load[TimerMixinJS]("react-timer-mixin/TimerMixin")
+abstract class TimerMixin extends OnUnmountNative {
 
-  onUnmount {
-      timerMixin.componentWillUnmount()
+  var _timeouts: List[Int] = Nil
+
+  def setTimeout(fn: js.Function0[Any], timeout: Double) = {
+    val x = dom.window.setTimeout(fn, timeout)
+    _timeouts +:= x
+    x
   }
 
-}
+  def clearTimeout(id: Int) = dom.window.clearTimeout(id)
 
-trait TimerMixinJS extends js.Object {
-  def setTimeout(fn : js.Function,timeout : Double) : js.Any  = js.native
+  def cleanup() = {
+    _timeouts.map(clearTimeout)
+    _timeouts = null
 
-  def clearTimeout(timeout : js.Any):Unit = js.native
+  }
 
-  def componentWillUnmount() : Unit = js.native
+  onUnmount(cleanup())
 
 }

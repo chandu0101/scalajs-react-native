@@ -7,7 +7,6 @@
   },
   "dependencies": {
     "react-native": "0.6.0",
-    "react-timer-mixin": "^0.13.1",
     "to-factory": "^1.0.0"
   }
 }

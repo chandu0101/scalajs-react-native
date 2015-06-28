@@ -3,7 +3,7 @@ package chandu0101.scalajs.rn.examples.uiexplorer.components
 import chandu0101.scalajs.rn.ReactNativeComponentB
 import chandu0101.scalajs.rn.components._
 import chandu0101.scalajs.rn.examples.uiexplorer.{UIExample, UIExplorerBlock, UIExplorerPage}
-import chandu0101.scalajs.rn.extras.OnUnmount
+import chandu0101.scalajs.rn.extras.OnUnmountNative
 import chandu0101.scalajs.rn.mixins.TimerMixin
 import japgolly.scalajs.react.BackendScope
 import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
@@ -14,11 +14,12 @@ object ActivityIndicatorIOSExample extends UIExample {
 
   class Backend(t: BackendScope[_, State]) extends TimerMixin {
 
-    def setToggleTimeout: Unit = timerMixin.setTimeout(() => {
+    def setToggleTimeout: Unit = setTimeout(() => {
       t.modState(s => s.copy(animating = !s.animating))
       setToggleTimeout
     }, 1200)
   }
+
 
   val ToggleAnimatingActivityIndicator = ReactNativeComponentB[Unit]("ToggleAnimatingActivityIndicator")
     .initialState(State())
@@ -29,7 +30,7 @@ object ActivityIndicatorIOSExample extends UIExample {
       size = "large")
   })
     .componentDidMount(scope => scope.backend.setToggleTimeout)
-    .configure(OnUnmount.install)
+    .configure(OnUnmountNative.install)
     .buildU
 
   val component = ReactNativeComponentB[Unit]("ActivityIndicatorIOSExample")

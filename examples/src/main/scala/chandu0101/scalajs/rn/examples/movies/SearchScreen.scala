@@ -30,7 +30,7 @@ object SearchScreen {
 
     var resultsCache = ResultsCache()
 
-    var timeoutID: js.Any = null
+    var timeoutID: Int = _
 
     def _urlForQueryAndPage(query: String, pageNumber: Int) = {
       val apiKey = API_KEYS(t.state.queryNumber % API_KEYS.length)
@@ -125,8 +125,8 @@ object SearchScreen {
 
     def onSearchChange(event: NEvent) = {
       val filter = event.nativeEvent.text.toString.toLowerCase()
-      timerMixin.clearTimeout(timeoutID)
-      timeoutID = timerMixin.setTimeout(() => searchMovies(filter), 100)
+      clearTimeout(timeoutID)
+      timeoutID = setTimeout(() => searchMovies(filter), 100)
       println(s" text string $filter")
     }
 

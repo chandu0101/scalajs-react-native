@@ -46,8 +46,8 @@ case class TouchableOpacity(onPressIn : js.UndefOr[() => Unit] = js.undefined,
     p
   }
 
-  def apply(children : ReactNode*) = {
+  def apply(children : ReactNode) = {
     val f = ReactNative.createFactory(ReactNative.TouchableOpacity)
-    f(toJS,children.toJsArray).asInstanceOf[ReactComponentU_]
+    f(toJS,children).asInstanceOf[ReactComponentU_]
   }
 }

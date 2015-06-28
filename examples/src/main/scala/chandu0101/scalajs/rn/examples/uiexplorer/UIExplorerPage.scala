@@ -2,7 +2,7 @@ package chandu0101.scalajs.rn.examples.uiexplorer
 
 import chandu0101.scalajs.rn.ReactNativeComponentB
 import chandu0101.scalajs.rn.components.{ScrollView, View}
-import japgolly.scalajs.react.ReactNode
+import japgolly.scalajs.react._
 import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 

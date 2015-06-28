@@ -10,7 +10,6 @@ import scala.scalajs.js
 import scala.scalajs.js.Dynamic.{literal => json}
 
 
-
 object MovieScreen {
 
   class Backend(t: BackendScope[_, _]) {
@@ -49,20 +48,23 @@ object MovieScreen {
     .render((P, S, B) => {
     val movie = B.props.route.passProps
     ScrollView(contentContainerStyle = styles.contentContainer)(
-      View(style = styles.mainSection)(
-        Image(style = styles.detailsImage, source = getImageSource(movie, "det")),
-        View(style = styles.rightPane)(
-          Text()(movie.year.toString),
-          View(style = styles.mpaaWrapper)(
-            Text(style = styles.mpaaText)(movie.mpaa_rating.toString)
-          ),
-          Ratings(movie.ratings)
-        )
-      ),
-      View(style = styles.separator)(),
-      Text()(movie.synopsis.toString),
-      View(style = styles.separator)(),
-      Cast(movie.abridged_cast.asInstanceOf[js.Array[js.Dynamic]])
+      View()(
+        View(style = styles.mainSection)(
+          Image(style = styles.detailsImage, source = getImageSource(movie, "det")),
+          View(style = styles.rightPane)(
+            Text()(movie.year.toString),
+            View(style = styles.mpaaWrapper)(
+              Text(style = styles.mpaaText)(movie.mpaa_rating.toString)
+            ),
+            Ratings(movie.ratings)
+          )
+        ),
+        View(style = styles.separator)(),
+        Text()(movie.synopsis.toString),
+        View(style = styles.separator)(),
+        Cast(movie.abridged_cast.asInstanceOf[js.Array[js.Dynamic]])
+      )
+
     )
   })
     .buildNative

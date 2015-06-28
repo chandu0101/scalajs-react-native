@@ -14,7 +14,7 @@ package object rn {
   lazy val ReactNative = load[ReactNative]("react-native")
 
   /**
-   * http://stackoverflow.com/questions/tagged/scala.js
+   * http://stackoverflow.com/questions/31097923/cannot-call-a-class-as-a-function-scala-js
    * https://github.com/timoxley/to-factory
    * https://github.com/babel/babel/issues/798
    */

@@ -9,7 +9,7 @@ import japgolly.scalajs.react.TopNode
  *
  * Install in `ReactNativeComponentB` via `.configure(OnUnmount.install)`.
  */
-trait OnUnmount {
+trait OnUnmountNative {
   private var unmountProcs: List[() => Unit] = Nil
   final def runUnmount(): Unit = {
     unmountProcs foreach (_())
@@ -19,12 +19,12 @@ trait OnUnmount {
   final def onUnmountF(f: () => Unit): Unit = unmountProcs ::= f
 }
 
-object OnUnmount {
-  def install[P, S, B <: OnUnmount] =
+object OnUnmountNative {
+  def install[P, S, B <: OnUnmountNative,N <: TopNode] =
     (_: ReactNativeComponentB[P, S, B,TopNode]).componentWillUnmount(_.backend.runUnmount())
 
   /**
    * Convenience class for the frequent case that a component needs a backend with `OnUnmount` and nothing else.
    */
-  final class Backend extends OnUnmount
+  final class Backend extends OnUnmountNative
 }
