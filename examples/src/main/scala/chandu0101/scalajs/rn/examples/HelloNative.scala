@@ -2,7 +2,7 @@ package chandu0101.scalajs.rn.examples
 
 import chandu0101.scalajs.rn.ReactNativeComponentB
 import chandu0101.scalajs.rn.components.{Text, View}
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 import scala.scalajs.js.Dynamic.{literal => json}
 

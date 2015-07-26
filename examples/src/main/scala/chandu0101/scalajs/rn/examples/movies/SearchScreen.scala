@@ -1,11 +1,11 @@
 package chandu0101.scalajs.rn.examples.movies
 
 import chandu0101.scalajs.rn._
-import chandu0101.scalajs.rn.apis.AjaxNative
 import chandu0101.scalajs.rn.components._
-import chandu0101.scalajs.rn.mixins.TimerMixin
+import chandu0101.scalajs.rn.mixins.TimerMixinNative
 import japgolly.scalajs.react._
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
+import org.scalajs.dom.ext.Ajax
 
 import scala.async.Async._
 //import scala.concurrent.ExecutionContext.Implicits.global
@@ -26,7 +26,7 @@ object SearchScreen {
 
   case class State(isLoading: Boolean = false, isLoadingTail: Boolean = false, dataSource: ListViewDataSource[js.Dynamic] = createListViewDataSource((row1: js.Dynamic, row2: js.Dynamic) => row1 != row2), filter: String = "", queryNumber: Int = 0)
 
-  class Backend(t: BackendScope[_, State]) extends TimerMixin{
+  class Backend(t: BackendScope[_, State]) extends TimerMixinNative{
 
     var resultsCache = ResultsCache()
 
@@ -57,7 +57,7 @@ object SearchScreen {
         t.modState(s => s.copy(isLoading = true, queryNumber = s.queryNumber + 1, isLoadingTail = false))
         val page = resultsCache.nextPageNumberForQuery.getOrElse(query, 1)
         async {
-          val result = await(AjaxNative.get(_urlForQueryAndPage(query, page)))
+          val result = await(Ajax.get(_urlForQueryAndPage(query, page)))
           val response = JSON.parse(result.responseText)
           val movies = response.movies.asInstanceOf[js.Array[js.Dynamic]]
           LOADING.update(query, false)
@@ -82,7 +82,7 @@ object SearchScreen {
       else resultsCache.totalForQuery(query) != resultsCache.dataForQuery(query).length
     }
 
-    def onEndReached = {
+    def onEndReached : Unit = {
       val query = t.state.filter
       if (hasMore || !t.state.isLoadingTail || !LOADING(query)) {
         // if we have all elements or fetching don't do anything
@@ -90,7 +90,7 @@ object SearchScreen {
         t.modState(s => s.copy(queryNumber = s.queryNumber + 1, isLoadingTail = true))
         val page = resultsCache.nextPageNumberForQuery(query)
         async {
-          val result = await(AjaxNative.get(_urlForQueryAndPage(query, page)))
+          val result = await(Ajax.get(_urlForQueryAndPage(query, page)))
           val response = JSON.parse(result.responseText)
           val moviesForQuery = resultsCache.dataForQuery(query)
           LOADING.update(query, false)
@@ -114,7 +114,7 @@ object SearchScreen {
     }
 
 
-    def renderRow(movie: js.Dynamic,sectionID : String, rowID : String) : Any = {
+    def renderRow(movie: js.Dynamic,sectionID : String, rowID : String):ReactElement  = {
       MovieCell(movie = movie, onSelect = () => selectMovie(movie), key = movie.title.toString)
     }
 
@@ -151,7 +151,7 @@ object SearchScreen {
     )
   }).build
 
-  val SearchBar = ReactNativeComponentB[((NEvent) => _, NEvent => _, Boolean)]("SearchBar")
+  val SearchBar = ReactNativeComponentB[((NEvent) => Unit, NEvent => Unit, Boolean)]("SearchBar")
     .render(P => {
     val (onChnage, onFocus, isLoading) = P
     View(style = styles.searchBar)(
@@ -169,7 +169,7 @@ object SearchScreen {
     .backend(new Backend(_))
     .render((P, S, B) => {
     val content: ReactNode = if (S.dataSource.getRowCount() == 0) NoMovies((S.filter, S.isLoading))
-    else ListView(
+    else ListView[js.Dynamic,String](
       ref = LREF,
       dataSource = S.dataSource,
       renderRow = B.renderRow,
@@ -177,7 +177,8 @@ object SearchScreen {
       renderFooter = B.renderFooter _,
       showsVerticalScrollIndicator = false,
       keyboardShouldPersistTaps = true,
-      automaticallyAdjustContentInsets = false)
+      automaticallyAdjustContentInsets = false
+    )
     View(style = styles.container)(
       SearchBar((B.onSearchChange, B.onSearchInputFocus, S.isLoading)),
       View(style = styles.separator)(),

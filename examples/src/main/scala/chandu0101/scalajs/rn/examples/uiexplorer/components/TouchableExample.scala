@@ -5,7 +5,7 @@ import chandu0101.scalajs.rn.ReactNativeComponentB
 import chandu0101.scalajs.rn.components._
 import chandu0101.scalajs.rn.examples.uiexplorer.{UIExample, UIExplorerBlock, UIExplorerPage}
 import japgolly.scalajs.react.BackendScope
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 import scala.scalajs.js
 
@@ -23,7 +23,6 @@ object TouchableExample extends UIExample {
           ),
           TouchableHighlight(style = styles.wrapper,
             activeOpacity = 1,
-            animationVelocity = 1,
             underlayColor = "rgb(210, 230, 255)",
             onPress = () => println("custom THW text - hightlight"))(
               Text(style = styles.text)(

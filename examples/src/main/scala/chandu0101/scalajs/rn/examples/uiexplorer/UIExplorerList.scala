@@ -4,9 +4,10 @@ import chandu0101.scalajs.rn
 import chandu0101.scalajs.rn.components._
 import chandu0101.scalajs.rn.examples.uiexplorer.apis._
 import chandu0101.scalajs.rn.examples.uiexplorer.components._
+import chandu0101.scalajs.rn.examples.uiexplorer.components.navigator.NavigatorExample
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 import chandu0101.scalajs.rn.{ReactNative, ReactNativeComponentB}
 import japgolly.scalajs.react.BackendScope
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 import scala.scalajs.js
 import scala.scalajs.js.Dynamic.{literal => json}
@@ -18,6 +19,7 @@ object UIExplorerList {
     ViewExample,
     WebViewExample,
     TouchableExample,
+    SegmentedControlExample,
     SwitchIOSExample,
     SliderIOSExample,
     ScrollViewExample,
@@ -27,7 +29,8 @@ object UIExplorerList {
     MapViewExample,
     TextInputExample,
     ListViewExample,
-    ListViewPagingExample)
+    ListViewPagingExample,
+    NavigatorExample)
 
   val APIS: js.Array[UIExample] = js.Array(AlertIOSExample,
     GeoLocationExample,
@@ -41,7 +44,7 @@ object UIExplorerList {
 
   class Backend(t: BackendScope[_, State]) {
 
-    def onPressRow(example: UIExample):Unit = {
+    def onPressRow(example: UIExample): Unit = {
       t.propsDynamic.navigator.push(
         NavigatorIOSRoute(title = example.title, component = example.component).toJson
       )
@@ -54,7 +57,7 @@ object UIExplorerList {
       t.modState(_.copy(datasource = ds.cloneWithRowsAndSections(json(componenets = filteredComponents, apis = filteredAPIS))))
     }
 
-    def renderRow(example: UIExample, sectionID: String, rowId: String): js.Object = {
+    def renderRow(example: UIExample, sectionID: String, rowId: String) = {
       View(key = example.title)(
         TouchableHighlight(onPress = () => onPressRow(example))(
           View(style = styles.row)(
@@ -70,7 +73,7 @@ object UIExplorerList {
       )
     }
 
-    def renderSectionHeader(data: js.Dynamic, sectionID: js.Dynamic): js.Object = {
+    def renderSectionHeader(data: js.Dynamic, sectionID: js.Dynamic) = {
       View(style = styles.sectionHeader)(
         Text(style = styles.sectionHeaderTitle)(
           sectionID.toString.toUpperCase

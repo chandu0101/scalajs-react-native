@@ -13,6 +13,8 @@ package object rn {
 
   lazy val ReactNative = load[ReactNative]("react-native")
 
+  lazy val Dimensions = load[js.Dynamic]("Dimensions")
+
   /**
    * http://stackoverflow.com/questions/31097923/cannot-call-a-class-as-a-function-scala-js
    * https://github.com/timoxley/to-factory

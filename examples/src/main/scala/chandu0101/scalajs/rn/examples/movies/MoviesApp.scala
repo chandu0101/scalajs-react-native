@@ -2,7 +2,7 @@ package chandu0101.scalajs.rn.examples.movies
 
 import chandu0101.scalajs.rn.ReactNativeComponentB
 import chandu0101.scalajs.rn.components.{NavigatorIOS, NavigatorIOSRoute}
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 object MoviesApp {
 

@@ -30,13 +30,13 @@ trait ReactNative extends js.Object {
   val TabBarItemIOS: js.Object = js.native
   val WebView: js.Object = js.native
   val TabBarIOS: js.Object = js.native
+  val SegmentedControlIOS: js.Object = js.native
 
   // apis
 
   val AlertIOS: AlertIOS = js.native
   val AppRegistry: AppRegistry = js.native
   val StyleSheet: StyleSheet = js.native
-  val Animation: Animation = js.native
   val AppStateIOS: AppStateIOS = js.native
   val AsyncStorage: AsyncStorageJS = js.native
   val CameraRoll: CameraRoll = js.native
@@ -49,6 +49,7 @@ trait ReactNative extends js.Object {
   val PanResponder: PanResponder = js.native
   val StatusBarIOS: js.Dynamic = js.native
   val VibrationIOS: VibrationIOS = js.native
+  val Dimensions: js.Dynamic = js.native
 
   def createClass[P, S, B, N <: TopNode](spec: ReactComponentSpec[P, S, B, N]): ReactComponentType[P, S, B, N] = js.native
 

@@ -3,6 +3,7 @@ package chandu0101.scalajs.rn.examples
 import chandu0101.scalajs.rn._
 import chandu0101.scalajs.rn.examples.movies.MoviesApp
 import chandu0101.scalajs.rn.examples.uiexplorer.UIExplorerApp
+import chandu0101.scalajs.rn.examples.uiexplorer.components.navigator.NavigationBarSample
 
 import scala.scalajs.js.Dynamic.{literal => lit}
 import scala.scalajs.js.JSApp

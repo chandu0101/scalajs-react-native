@@ -4,7 +4,7 @@ import chandu0101.scalajs.rn._
 import chandu0101.scalajs.rn.components._
 import chandu0101.scalajs.rn.examples.uiexplorer.{UIExplorerPage, UIExample}
 import japgolly.scalajs.react.BackendScope
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 import scala.collection.mutable.Map
 import scala.scalajs.js
 

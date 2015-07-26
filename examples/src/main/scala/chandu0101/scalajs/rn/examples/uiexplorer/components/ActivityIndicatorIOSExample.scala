@@ -4,15 +4,15 @@ import chandu0101.scalajs.rn.ReactNativeComponentB
 import chandu0101.scalajs.rn.components._
 import chandu0101.scalajs.rn.examples.uiexplorer.{UIExample, UIExplorerBlock, UIExplorerPage}
 import chandu0101.scalajs.rn.extras.OnUnmountNative
-import chandu0101.scalajs.rn.mixins.TimerMixin
+import chandu0101.scalajs.rn.mixins.TimerMixinNative
 import japgolly.scalajs.react.BackendScope
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 object ActivityIndicatorIOSExample extends UIExample {
 
   case class State(animating: Boolean = true)
 
-  class Backend(t: BackendScope[_, State]) extends TimerMixin {
+  class Backend(t: BackendScope[_, State]) extends TimerMixinNative {
 
     def setToggleTimeout: Unit = setTimeout(() => {
       t.modState(s => s.copy(animating = !s.animating))
@@ -27,7 +27,7 @@ object ActivityIndicatorIOSExample extends UIExample {
     .render((P, S, B) => {
     ActivityIndicatorIOS(animating = S.animating,
       style = styles.animating,
-      size = "large")
+      size = ActivityIndicatorIOSSize.LARGE)
   })
     .componentDidMount(scope => scope.backend.setToggleTimeout)
     .configure(OnUnmountNative.install)
@@ -45,14 +45,14 @@ object ActivityIndicatorIOSExample extends UIExample {
       UIExplorerBlock("Large")(
         ActivityIndicatorIOS(style = styles.default,
           color = "white",
-          size = "large")
+          size = ActivityIndicatorIOSSize.LARGE)
       ),
       UIExplorerBlock("Large custom colors")(
         View(style = styles.horizontal)(
           ActivityIndicatorIOS(
             key = "3",
             color = "#00aa00",
-            size = "large")
+            size = ActivityIndicatorIOSSize.LARGE)
         )
       ),
       UIExplorerBlock("Start/Stop")(

@@ -9,30 +9,53 @@ import scala.scalajs.js.{UndefOr, undefined}
 /**
  * Created by chandrasekharkode on 3/31/15.
  *
- *  key: PropTypes.string,
- *  style: PropTypes.dynamic,
+ * key: PropTypes.string,
+   ref: PropTypes.string,
+  style: PropTypes.js.Any,
     animating: PropTypes.bool,
-    color: PropTypes.string,
-    size: PropTypes.string,
+     color: PropTypes.string,
+    hidesWhenStopped: PropTypes.bool,
+    onLayout: PropTypes.func,
+    size: PropTypes.ActivityIndicatorIOSSize,
  */
+
+
 
 
 object ActivityIndicatorIOS {
 
-  def apply(key : UndefOr[String] = undefined,
-            animating : UndefOr[Boolean]=undefined,
-            style : UndefOr[js.Any]=undefined,
-            color : UndefOr[String] = undefined,
-            size : UndefOr[String] = undefined) = {
+  def apply(size : js.UndefOr[ActivityIndicatorIOSSize] = js.undefined,
+            hidesWhenStopped : js.UndefOr[Boolean]=js.undefined,
+            style : js.UndefOr[js.Any] = js.undefined,
+            onLayout : js.UndefOr[js.Function] = js.undefined ,
+            ref : js.UndefOr[String] = js.undefined,
+            color : js.UndefOr[String] = js.undefined,
+            key : js.UndefOr[String] = js.undefined,
+            animating : js.UndefOr[Boolean]=js.undefined) = {
+
     val p = js.Dynamic.literal()
+    size.foreach(v => p.updateDynamic("size")(v.size))
+    hidesWhenStopped.foreach(v => p.updateDynamic("hidesWhenStopped")(v))
+    style.foreach(v => p.updateDynamic("style")(v))
+    onLayout.foreach(v => p.updateDynamic("onLayout")(v))
+    ref.foreach(v => p.updateDynamic("ref")(v))
+    color.foreach(v => p.updateDynamic("color")(v))
     key.foreach(v => p.updateDynamic("key")(v))
     animating.foreach(v => p.updateDynamic("animating")(v))
-    color.foreach(v => p.updateDynamic("color")(v))
-    style.foreach(v => p.updateDynamic("style")(v))
-    size.foreach(v => p.updateDynamic("size")(v))
+
     val f = ReactNative.createFactory(ReactNative.ActivityIndicatorIOS)
     f(p).asInstanceOf[ReactComponentU_]
   }
-}
-     
 
+}
+
+
+class ActivityIndicatorIOSSize private(val size: String) extends AnyVal
+
+object ActivityIndicatorIOSSize {
+
+  val SMALL = new ActivityIndicatorIOSSize("small")
+  val LARGE = new ActivityIndicatorIOSSize("large")
+
+  def newSize(size: String) = new ActivityIndicatorIOSSize(size)
+}

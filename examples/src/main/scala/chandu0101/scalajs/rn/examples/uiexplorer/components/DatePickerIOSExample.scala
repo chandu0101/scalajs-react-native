@@ -4,7 +4,7 @@ import chandu0101.scalajs.rn.components._
 import chandu0101.scalajs.rn.examples.uiexplorer.{UIExample, UIExplorerBlock, UIExplorerPage}
 import chandu0101.scalajs.rn.{NEvent, ReactNativeComponentB}
 import japgolly.scalajs.react.BackendScope
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 import scala.scalajs.js
 import scala.scalajs.js.Date
@@ -62,18 +62,18 @@ object DatePickerIOSExample extends UIExample {
           onChange = B.onTimezoneChange _)()),
       Heading("Date + TimePicker"),
       DatePickerIOS(date = S.date,
-        mode = "datetime", timeZoneOffsetInMinutes = (S.timeZoneOffsetInHours * 60).toInt,
+        mode = DatePickerIOSMode.DATE_TIME, timeZoneOffsetInMinutes = (S.timeZoneOffsetInHours * 60).toInt,
         onDateChange = B.onDateChange _),
       Heading("Date Picker"),
       DatePickerIOS(date = S.date,
-        mode = "date", timeZoneOffsetInMinutes = (S.timeZoneOffsetInHours * 60).toInt,
+        mode = DatePickerIOSMode.DATE, timeZoneOffsetInMinutes = (S.timeZoneOffsetInHours * 60).toInt,
         onDateChange = B.onDateChange _),
       Heading("Time picker 10-minute interval"),
       DatePickerIOS(date = S.date,
-        mode = "time",
+        mode = DatePickerIOSMode.TIME,
         timeZoneOffsetInMinutes = (S.timeZoneOffsetInHours * 60).toInt,
         onDateChange = B.onDateChange _,
-        minuteInterval = 10)
+        minuteInterval = MinuteInterval._10)
 
     )
   }).build

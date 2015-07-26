@@ -5,7 +5,7 @@ import chandu0101.scalajs.rn.apis.{AsyncStorage, AsyncStorageException}
 import chandu0101.scalajs.rn.components._
 import chandu0101.scalajs.rn.examples.uiexplorer.{UIExample, UIExplorerBlock, UIExplorerPage}
 import japgolly.scalajs.react.BackendScope
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 import scala.async.Async._
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -30,7 +30,7 @@ object AsyncStorageExample extends UIExample {
       }
     }
 
-    def onValueChange(selectedValue: String) = {
+    def onValueChange(selectedValue: String) : Unit = {
       t.modState(_.copy(selectedValue = selectedValue))
       async {
         val result = await(AsyncStorage.setItem(STORAGE_KEY, selectedValue))
@@ -38,7 +38,7 @@ object AsyncStorageExample extends UIExample {
       }.recover(saveError)
     }
 
-    def removeStorage = async{
+    def removeStorage : Unit = async{
       val result = await(AsyncStorage.removeItem(STORAGE_KEY))
       appendMessage(s"Selection Removed from Disk")
     }.recover(saveError)

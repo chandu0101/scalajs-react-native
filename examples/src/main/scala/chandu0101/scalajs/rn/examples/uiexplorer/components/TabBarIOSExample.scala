@@ -4,7 +4,7 @@ import chandu0101.scalajs.rn.ReactNativeComponentB
 import chandu0101.scalajs.rn.components._
 import chandu0101.scalajs.rn.examples.uiexplorer.UIExample
 import japgolly.scalajs.react.BackendScope
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 import scala.scalajs.js
 import scala.scalajs.js.Dynamic.{literal => json}
@@ -40,14 +40,14 @@ object TabBarIOSExample extends UIExample{
     .backend(new Backend(_))
     .render((P,S,B) => {
     val badgeValue = if(S.notifCount >0) S.notifCount.toString else null
-     TabBarIOS(
-       TabBarItemIOS(key = BLUE_TAB, icon = B.getImage("favorites"),selected = (S.selectedTab == BLUE_TAB),onPress = B.selectTab(BLUE_TAB))(
+     TabBarIOS()(
+       TabBarItemIOS(key = BLUE_TAB, icon = B.getImage("favorites"),selected = (S.selectedTab == BLUE_TAB),onPress = () => B.selectTab(BLUE_TAB))(
          B.renderContent("#414A8C","Scala-JS Blue Tab")
        ),
-       TabBarItemIOS(key = RED_TAB, badge = badgeValue, icon = B.getImage("history"),selected = (S.selectedTab == RED_TAB),onPress = B.selectTab(RED_TAB))(
+       TabBarItemIOS(key = RED_TAB, badge = badgeValue, icon = B.getImage("history"),selected = (S.selectedTab == RED_TAB),onPress = () => B.selectTab(RED_TAB))(
          B.renderContent("#783E33","Scala-JS Red Tab")
        ),
-       TabBarItemIOS(key = GREEN_TAB, icon = B.getImage("favorites"),selected = (S.selectedTab == GREEN_TAB),onPress = B.selectTab(GREEN_TAB))(
+       TabBarItemIOS(key = GREEN_TAB, icon = B.getImage("favorites"),selected = (S.selectedTab == GREEN_TAB),onPress = () => B.selectTab(GREEN_TAB))(
          B.renderContent("#21551C","Scala-JS Green Tab")
        )
      )

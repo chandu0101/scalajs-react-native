@@ -3,7 +3,7 @@ package chandu0101.scalajs.rn.examples.uiexplorer.components
 import chandu0101.scalajs.rn.ReactNativeComponentB
 import chandu0101.scalajs.rn.components._
 import chandu0101.scalajs.rn.examples.uiexplorer.{UIExample, UIExplorerBlock, UIExplorerPage}
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 import scala.scalajs.js
 
@@ -20,12 +20,13 @@ object ScrollViewExample extends UIExample {
     .shouldComponentUpdate((_, _, _) => false)
     .build
 
-  val component = ReactNativeComponentB[Unit]("WebViewExample")
+  val component = ReactNativeComponentB[Unit]("ScrollViewExample")
     .render(P => {
     UIExplorerPage(
       UIExplorerBlock("ScrollView Vertical")(
         ScrollView(style = styles.scrollView,
           contentInset = EdgeInsets(top = -50.0),
+          scrollEventThrottle = 16,
           onScroll = () => println(s"on Scroll!"))(
             THUMBS.++(THUMBS).zipWithIndex.map {
               case (u, i) => THUMB.withKey(i)(u)
@@ -35,6 +36,7 @@ object ScrollViewExample extends UIExample {
       UIExplorerBlock("ScrollView horizontal")(
         ScrollView(style = styles.horizontalScrollView,
           horizontal = true,
+          scrollEventThrottle = 16,
           contentInset = EdgeInsets(top = -50.0),
           onScroll = () => println(s"on Scroll!"))(
             THUMBS.++(THUMBS).zipWithIndex.map {

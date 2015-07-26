@@ -2,8 +2,8 @@ package chandu0101.scalajs.rn.examples.uiexplorer
 
 import chandu0101.scalajs.rn.ReactNativeComponentB
 import chandu0101.scalajs.rn.components.{Text, View}
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 import japgolly.scalajs.react.ReactNode
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 
 object UIExplorerBlock {

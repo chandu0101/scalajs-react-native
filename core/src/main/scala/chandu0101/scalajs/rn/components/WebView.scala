@@ -4,61 +4,84 @@ import chandu0101.scalajs.rn.{NEvent, ReactNative}
 import japgolly.scalajs.react.ReactComponentU_
 
 import scala.scalajs.js
-import scala.scalajs.js.{UndefOr, undefined}
 
 /**
  *
  *
  * key: PropTypes.string,
-  ref: PropTypes.string,
-style: PropTypes.object,
+    ref: PropTypes.string,
+    style: PropTypes.js.Any,
+ automaticallyAdjustContentInsets: PropTypes.bool,
+     bounces: PropTypes.bool,
+    contentInset: PropTypes.EdgeInsets,
+    html: PropTypes.string,
+    injectedJavaScript: PropTypes.string,
+    javaScriptEnabledAndroid: PropTypes.bool,
+       onNavigationStateChange: PropTypes.NavigationState => Unit,
     renderError: PropTypes.func,
     renderLoading: PropTypes.func,
-    url: PropTypes.string.isRequired,
-    automaticallyAdjustContentInsets: PropTypes.bool,
-    shouldInjectAJAXHandler: PropTypes.bool,
-    contentInset: EdgeInsetsPropType,
-    onNavigationStateChange: PropTypes.func,
+    scalesPageToFit: PropTypes.bool,
+    scrollEnabled: PropTypes.bool,
     startInLoadingState: PropTypes.bool,
+    url: PropTypes.string.isRequired,
 
  */
 
 
 object WebView {
 
+  def apply(contentInset: js.UndefOr[EdgeInsets] = js.undefined,
+            url: String,
+            style: js.UndefOr[js.Any] = js.undefined,
+            javaScriptEnabledAndroid: js.UndefOr[Boolean] = js.undefined,
+            ref: js.UndefOr[String] = js.undefined,
+            injectedJavaScript: js.UndefOr[String] = js.undefined,
+            scalesPageToFit: js.UndefOr[Boolean] = js.undefined,
+            key: js.UndefOr[String] = js.undefined,
+            scrollEnabled: js.UndefOr[Boolean] = js.undefined,
+            onNavigationStateChange: js.UndefOr[NavigationState => Unit] = js.undefined,
+            bounces: js.UndefOr[Boolean] = js.undefined,
+            renderLoading: js.UndefOr[js.Function] = js.undefined,
+            automaticallyAdjustContentInsets: js.UndefOr[Boolean] = js.undefined,
+            renderError: js.UndefOr[js.Function] = js.undefined,
+            html: js.UndefOr[String] = js.undefined,
+            startInLoadingState: js.UndefOr[Boolean] = js.undefined) = {
 
-  def apply(url: String,
-            ref : UndefOr[String] = undefined,
-            style: UndefOr[js.Any] = undefined,
-            shouldInjectAJAXHandler: UndefOr[Boolean] = undefined,
-            key: UndefOr[String] = undefined,
-            onNavigationStateChange: UndefOr[(NavigationState) => _] = undefined,
-            renderLoading: UndefOr[js.Function] = undefined,
-            automaticallyAdjustContentInsets: UndefOr[Boolean] = undefined,
-            renderError: UndefOr[js.Function] = undefined,
-            startInLoadingState: UndefOr[Boolean] = undefined) = {
     val p = js.Dynamic.literal()
+    contentInset.foreach(v => p.updateDynamic("contentInset")(v.toJson))
     p.updateDynamic("url")(url)
     style.foreach(v => p.updateDynamic("style")(v))
-    shouldInjectAJAXHandler.foreach(v => p.updateDynamic("shouldInjectAJAXHandler")(v))
-    key.foreach(v => p.updateDynamic("key")(v))
+    javaScriptEnabledAndroid.foreach(v => p.updateDynamic("javaScriptEnabledAndroid")(v))
     ref.foreach(v => p.updateDynamic("ref")(v))
+    injectedJavaScript.foreach(v => p.updateDynamic("injectedJavaScript")(v))
+    scalesPageToFit.foreach(v => p.updateDynamic("scalesPageToFit")(v))
+    key.foreach(v => p.updateDynamic("key")(v))
+    scrollEnabled.foreach(v => p.updateDynamic("scrollEnabled")(v))
     onNavigationStateChange.foreach(v => p.updateDynamic("onNavigationStateChange")(v))
+    bounces.foreach(v => p.updateDynamic("bounces")(v))
     renderLoading.foreach(v => p.updateDynamic("renderLoading")(v))
-    renderError.foreach(v => p.updateDynamic("renderError")(v))
     automaticallyAdjustContentInsets.foreach(v => p.updateDynamic("automaticallyAdjustContentInsets")(v))
+    renderError.foreach(v => p.updateDynamic("renderError")(v))
+    html.foreach(v => p.updateDynamic("html")(v))
     startInLoadingState.foreach(v => p.updateDynamic("startInLoadingState")(v))
+
     val f = ReactNative.createFactory(ReactNative.WebView)
     f(p).asInstanceOf[ReactComponentU_]
   }
+
 }
+
 
 trait NavigationState extends js.Object {
 
   def url: String = js.native
+
   def title: String = js.native
+
   def loading: Boolean = js.native
+
   def canGoBack: Boolean = js.native
+
   def canGoForward: Boolean = js.native
 
 }

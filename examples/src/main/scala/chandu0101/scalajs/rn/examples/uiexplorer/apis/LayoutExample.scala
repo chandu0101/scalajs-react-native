@@ -3,7 +3,7 @@ package chandu0101.scalajs.rn.examples.uiexplorer.apis
 import chandu0101.scalajs.rn.ReactNativeComponentB
 import chandu0101.scalajs.rn.components._
 import chandu0101.scalajs.rn.examples.uiexplorer.UIExample
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 object LayoutExample extends UIExample {
 

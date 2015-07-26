@@ -4,14 +4,14 @@ import chandu0101.scalajs.rn.ReactNativeComponentB
 import chandu0101.scalajs.rn.components._
 import chandu0101.scalajs.rn.examples.uiexplorer.{UIExample, UIExplorerBlock, UIExplorerPage}
 import japgolly.scalajs.react.BackendScope
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 object SliderIOSExample extends UIExample {
 
   case class State(value: Double = 0)
 
   class Backend(t: BackendScope[_, State]) {
-    def handleValueChnage(value: Double) = {
+    def handleValueChnage(value: Double): Unit = {
       t.modState(_.copy(value = value))
     }
   }

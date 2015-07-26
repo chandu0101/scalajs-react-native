@@ -8,7 +8,7 @@ import scala.scalajs.js
  * make sure u configure(OnUnMountNative.install)
 
  */
-abstract class TimerMixin extends OnUnmountNative {
+abstract class TimerMixinNative extends OnUnmountNative {
 
   var _timeouts: List[Int] = Nil
 

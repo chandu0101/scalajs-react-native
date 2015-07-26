@@ -5,7 +5,7 @@ import chandu0101.scalajs.rn.ReactNativeComponentB
 import chandu0101.scalajs.rn.apis.AlertButton
 import chandu0101.scalajs.rn.components.{Text, TouchableHighlight, View}
 import chandu0101.scalajs.rn.examples.uiexplorer.{UIExample, UIExplorerBlock, UIExplorerPage}
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 import scala.scalajs.js
 import scala.scalajs.js.Dynamic.{literal => json}

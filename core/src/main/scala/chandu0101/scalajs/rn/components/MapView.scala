@@ -5,6 +5,7 @@ import japgolly.scalajs.react.ReactComponentU_
 
 import scala.scalajs.js
 import scala.scalajs.js.Dynamic.{literal => json}
+import scala.scalajs.js.JSConverters.genTravConvertible2JSRichGenTrav
 import scala.scalajs.js.{UndefOr, undefined}
 
 /**
@@ -12,60 +13,81 @@ import scala.scalajs.js.{UndefOr, undefined}
  *
  *
 key: PropTypes.string,
-style: PropTypes.object,
+style: PropTypes.js.Any,
+ref: PropTypes.String,
   showsUserLocation: PropTypes.bool,
     zoomEnabled: PropTypes.bool,
     rotateEnabled: PropTypes.bool,
     pitchEnabled: PropTypes.bool,
     scrollEnabled: PropTypes.bool,
     region:PropTypes.MapViewRegion,
+    mapType:PropTypes.MapType,
     maxDelta: PropTypes.number,
     minDelta: PropTypes.number,
     legalLabelInsets: PropTypes.EdgeInsets,
-    onRegionChange: PropTypes.(MapViewRegion) => _,
- annotations:PropTypes.js.Array[MapViewAnnotation]
-    onRegionChangeComplete: PropTypes.(js.Dynamic) => _,
+    onRegionChange: PropTypes.MapViewRegion => Unit,
+    onAnnotationPress: PropTypes.MapViewAnnotation => Unit,
+ annotations:PropTypes.Seq[MapViewAnnotation]
+    onRegionChangeComplete: PropTypes.MapViewRegion => Unit,
  */
+
 
 
 object MapView {
 
-
-  def apply(maxDelta: UndefOr[Int] = undefined,
-            pitchEnabled: UndefOr[Boolean] = undefined,
-            style: UndefOr[js.Any] = undefined,
-            legalLabelInsets: UndefOr[EdgeInsets] = undefined,
-            onRegionChange: UndefOr[(js.Dynamic) => _] = undefined,
-            annotations: UndefOr[js.Array[MapViewAnnotation]] = undefined,
-            minDelta: UndefOr[Int] = undefined,
-            key: UndefOr[String] = undefined,
-            scrollEnabled: UndefOr[Boolean] = undefined,
-            rotateEnabled: UndefOr[Boolean] = undefined,
-            onRegionChangeComplete: UndefOr[(js.Dynamic) => _] = undefined,
-            region: UndefOr[MapViewRegion] = undefined,
-            zoomEnabled: UndefOr[Boolean] = undefined,
-            showsUserLocation: UndefOr[Boolean] = undefined) = {
+  def apply(maxDelta : js.UndefOr[Int] = js.undefined,
+            pitchEnabled : js.UndefOr[Boolean]=js.undefined,
+            mapType : js.UndefOr[MapType] = js.undefined,
+            style : js.UndefOr[js.Any] = js.undefined,
+            legalLabelInsets : js.UndefOr[EdgeInsets] = js.undefined,
+            onRegionChange : js.UndefOr[MapViewRegion => Unit] = js.undefined,
+            ref : js.UndefOr[String] = js.undefined,
+            minDelta : js.UndefOr[Int] = js.undefined,
+            key : js.UndefOr[String] = js.undefined,
+            scrollEnabled : js.UndefOr[Boolean]=js.undefined,
+            annotations : js.UndefOr[Seq[MapViewAnnotation]] = js.undefined,
+            rotateEnabled : js.UndefOr[Boolean]=js.undefined,
+            onRegionChangeComplete : js.UndefOr[MapViewRegion => Unit] = js.undefined,
+            region : js.UndefOr[MapViewRegion] = js.undefined,
+            zoomEnabled : js.UndefOr[Boolean]=js.undefined,
+            showsUserLocation : js.UndefOr[Boolean]=js.undefined,
+            onAnnotationPress : js.UndefOr[MapViewAnnotation => Unit] = js.undefined) = {
 
     val p = js.Dynamic.literal()
     maxDelta.foreach(v => p.updateDynamic("maxDelta")(v))
     pitchEnabled.foreach(v => p.updateDynamic("pitchEnabled")(v))
+    mapType.foreach(v => p.updateDynamic("mapType")(v.tpe))
     style.foreach(v => p.updateDynamic("style")(v))
-    legalLabelInsets.foreach(v => p.updateDynamic("legalLabelInsets")(if (v != null) v.toJson else null))
-    annotations.foreach(v => p.updateDynamic("annotations")(v.map(a => a.toJson)))
-    onRegionChange.foreach(v => p.updateDynamic("onRegionChange")(v))
+    legalLabelInsets.foreach(v => p.updateDynamic("legalLabelInsets")(v.toJson))
+    onRegionChange.foreach(v => p.updateDynamic("onRegionChange")((r : js.Dynamic) => v(MapViewRegion.fromJson(r))))
+    ref.foreach(v => p.updateDynamic("ref")(v))
     minDelta.foreach(v => p.updateDynamic("minDelta")(v))
     key.foreach(v => p.updateDynamic("key")(v))
     scrollEnabled.foreach(v => p.updateDynamic("scrollEnabled")(v))
+    annotations.foreach(v => p.updateDynamic("annotations")(v.map(_.toJson).toJSArray))
     rotateEnabled.foreach(v => p.updateDynamic("rotateEnabled")(v))
-    onRegionChangeComplete.foreach(v => p.updateDynamic("onRegionChangeComplete")(v))
-    region.foreach(v => p.updateDynamic("region")(if (v != null) if (v != null) v.toJson else null else null))
+    onRegionChangeComplete.foreach(v => p.updateDynamic("onRegionChangeComplete")((r : js.Dynamic) => v(MapViewRegion.fromJson(r))))
+    region.foreach(v => p.updateDynamic("region")(v.toJson))
     zoomEnabled.foreach(v => p.updateDynamic("zoomEnabled")(v))
     showsUserLocation.foreach(v => p.updateDynamic("showsUserLocation")(v))
+    onAnnotationPress.foreach(v => p.updateDynamic("onAnnotationPress")((annotation : js.Dynamic) => v(MapViewAnnotation.fromJson(annotation))))
 
     val f = ReactNative.createFactory(ReactNative.MapView)
-
     f(p).asInstanceOf[ReactComponentU_]
   }
+
+}
+
+
+
+class MapType private(val tpe: String)
+
+object MapType {
+
+  val STANDARD = new MapType("standard")
+  val SATELLITE = new MapType("satellite")
+  val HYBRID = new MapType("hybrid")
+
 }
 
 

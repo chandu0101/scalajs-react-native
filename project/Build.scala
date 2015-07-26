@@ -6,9 +6,9 @@ import sbt._
 
 object ScalajsReactNative extends Build {
 
-  val Scala211 = "2.11.6"
+  import Dependencies._
 
-  val scalajsReactVersion = "0.9.1"
+  val Scala211 = "2.11.7"
 
   type PE = Project => Project
 
@@ -63,31 +63,15 @@ object ScalajsReactNative extends Build {
       }))
     )
 
-  def utestSettings: PE =
-      _.configure(useReact("test"))
-      .settings(
-      libraryDependencies  += "com.lihaoyi" %%% "utest" % "0.3.0",
-      testFrameworks       += new TestFramework("utest.runner.Framework"),
-      scalaJSStage in Test := FastOptStage,
-      requiresDOM          := true,
-      jsEnv in Test        := PhantomJSEnv().value)
-
-  def useReact(scope: String = "compile"): PE =
-    _.settings(
-      libraryDependencies ++= Seq(),
-      jsDependencies ++= Seq("org.webjars" % "react" % "0.12.1" % scope / "react-with-addons.js" commonJSName "React"
-      ),
-      jsDependencies += ProvidedJS / "highlight.pack.js",
-      skip in packageJSDependencies := false)
-
-    val genReactFile = Def.taskKey[File]("Generate the file given to react native")
+     // ==============   react-native tasks ============ //
+    val fullOptIOS = Def.taskKey[File]("Generate the file given to react native")
 
     def createLauncher(scope: String = "compile"): PE =
     _.settings(
-      artifactPath in Compile in genReactFile :=
+      artifactPath in Compile in fullOptIOS :=
         baseDirectory.value / "index.ios.js",
-      genReactFile in Compile := {
-        val outFile = (artifactPath in Compile in genReactFile).value
+      fullOptIOS in Compile := {
+        val outFile = (artifactPath in Compile in fullOptIOS).value
 
         IO.copyFile((fullOptJS in Compile).value.data, outFile)
 
@@ -106,7 +90,7 @@ object ScalajsReactNative extends Build {
   def extModuleName(mname: String): PE =
     _.settings(name := mname)
 
-  // ==============================================================================================
+  // ========================================= Module Definitions ====================== /
   lazy val root = Project("root", file("."))
     .aggregate(core,styles, examples)
     .configure(commonSettings, preventPublication, addCommandAliases(
@@ -115,24 +99,17 @@ object ScalajsReactNative extends Build {
       "T"  -> "; clean ;t",
       "TT" -> ";+clean ;tt"))
 
-  // ==============================================================================================
   lazy val core = project
     .configure(commonSettings, publicationSettings)
-    .settings(
-      name := "core",
-      libraryDependencies ++= Seq("com.github.japgolly.scalajs-react" %%% "core" % scalajsReactVersion,
-        "com.github.japgolly.scalajs-react" %%% "extra" % scalajsReactVersion)
-    )
+    .settings(name := "core")
+    .settings(coreModuleDeps :_*)
 
   lazy val styles = project
     .configure(commonSettings, publicationSettings,extModuleName("styles"))
 
-  // ==============================================================================================
   lazy val examples = project
     .dependsOn(core,styles)
     .configure(commonSettings,createLauncher(), preventPublication)
-    .settings(
-      libraryDependencies += "org.scala-lang.modules" %% "scala-async" % "0.9.2"
-    )
+    .settings(exampleModuleDeps :_*)
 
 }

@@ -1,5 +1,7 @@
 package chandu0101.scalajs.rn.apis
 
+import japgolly.scalajs.react.ReactComponentType
+
 import scala.scalajs.js
 
 

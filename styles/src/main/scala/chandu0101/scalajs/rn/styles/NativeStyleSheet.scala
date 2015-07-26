@@ -1,4 +1,4 @@
-package main.scala.chandu0101.scalajs.rn.styles
+package chandu0101.scalajs.rn.styles
 
 import scala.scalajs.js
 import scala.scalajs.js.Dynamic.{literal => json}

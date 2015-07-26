@@ -4,7 +4,7 @@ import chandu0101.scalajs.rn.components._
 import chandu0101.scalajs.rn.examples.uiexplorer.{UIExample, UIExplorerBlock, UIExplorerPage}
 import chandu0101.scalajs.rn.{NEvent, ReactNativeComponentB}
 import japgolly.scalajs.react.BackendScope
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 import scala.scalajs.js
 import scala.util.Try
@@ -39,7 +39,7 @@ object MapViewExample extends UIExample {
       region = region.copy(longitudeDelta = getDouble(e.nativeEvent.text.toString))
     }
 
-    def change = {
+    def change : Unit = {
       t.modState(_.copy(region = region))
       t.props.onChange(t.state.region)
     }
@@ -89,23 +89,22 @@ object MapViewExample extends UIExample {
 
   case class InputProps(region: MapViewRegion, onChange: (MapViewRegion) => _)
 
-  case class StateMap(mapRegion: MapViewRegion = null, mapRegionInput: MapViewRegion = null, annotations: js.Array[MapViewAnnotation] = js.Array(), isFirstLoad: Boolean = true)
+  case class StateMap(mapRegion: MapViewRegion = MapViewRegion(0.0, 0.0, 0.0, 0.0), mapRegionInput: MapViewRegion = MapViewRegion(0.0, 0.0, 0.0, 0.0), annotations: Seq[MapViewAnnotation] = Seq(), isFirstLoad: Boolean = true)
 
   class BackendMap(t: BackendScope[_, StateMap]) {
 
     def getAnnotations(region: MapViewRegion) = {
-      js.Array(MapViewAnnotation(latitude = region.latitude, longitude = region.longitude, title = "You Are Here"))
+      Seq(MapViewAnnotation(latitude = region.latitude, longitude = region.longitude, title = "You Are Here"))
     }
 
-    def onRegionChange(region: js.Dynamic) = {
-      t.modState(_.copy(mapRegionInput = MapViewRegion.fromJson(region)))
+    def onRegionChange(region: MapViewRegion) = {
+      t.modState(_.copy(mapRegionInput = region))
     }
 
-    def onRegionChangeComplete(region: js.Dynamic) = {
-      val regionS = MapViewRegion.fromJson(region)
+    def onRegionChangeComplete(region: MapViewRegion) = {
       if (t.state.isFirstLoad) t.modState(_.copy(
-        mapRegionInput = regionS,
-        annotations = getAnnotations(regionS),
+        mapRegionInput = region,
+        annotations = getAnnotations(region),
         isFirstLoad = false
       ))
     }

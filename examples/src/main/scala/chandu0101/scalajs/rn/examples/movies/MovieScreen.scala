@@ -4,7 +4,7 @@ import chandu0101.scalajs.rn.components.{Image, ScrollView, Text, View}
 import chandu0101.scalajs.rn.examples.movies.MoviesUtil._
 import chandu0101.scalajs.rn.{ReactNative, ReactNativeComponentB}
 import japgolly.scalajs.react._
-import main.scala.chandu0101.scalajs.rn.styles.NativeStyleSheet
+import chandu0101.scalajs.rn.styles.NativeStyleSheet
 
 import scala.scalajs.js
 import scala.scalajs.js.Dynamic.{literal => json}
