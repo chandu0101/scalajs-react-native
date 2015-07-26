@@ -125,15 +125,15 @@ Number of examples can be found in [examples](https://github.com/chandu0101/scal
 #### How to run examples :
 
 ```scala
+
+ sbt ~fullOptIOS
+ 
+ // open new terminal tab/window
  cd examples
- // start react-native package
  npm install
- npm run start 
+ npm run start // start react-native package
  
-// open new terminal tab/window
- sbt ~genReactFile
- 
- Open ScalaJSReactNative.xcodeproj using xcode
+ Open ScalaJSReactNative.xcodeproj using latest xcode
  
  Cmd+R - to run project
  
