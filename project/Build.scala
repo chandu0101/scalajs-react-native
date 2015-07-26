@@ -16,7 +16,7 @@ object ScalajsReactNative extends Build {
     _.enablePlugins(ScalaJSPlugin)
       .settings(
         organization       := "com.github.chandu0101.scalajs-react-native",
-        version            := "0.0.2-SNAPSHOT",
+        version            := "0.2.0",
         homepage           := Some(url("https://github.com/chandu0101/scalajs-react-native")),
         licenses           += ("Apache-2.0", url("http://opensource.org/licenses/Apache-2.0")),
         scalaVersion       := Scala211,

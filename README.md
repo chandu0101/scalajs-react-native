@@ -17,7 +17,7 @@ add this to your sbt build file
 
 ```scala
 
-libraryDependencies += "com.github.chandu0101.scalajs-react-native" %%% "core" % "0.0.1"
+libraryDependencies += "com.github.chandu0101.scalajs-react-native" %%% "core" % "0.2.0"
 
 ```
 
@@ -97,7 +97,7 @@ Example :
  In order to define styles in type safe manner you need styles module
  
  ```scala
- libraryDependencies += "com.github.chandu0101.scalajs-react-native" %%% "styles" % "0.0.1"
+ libraryDependencies += "com.github.chandu0101.scalajs-react-native" %%% "styles" % "0.2.0"
  
  ```
  
