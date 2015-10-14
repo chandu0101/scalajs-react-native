@@ -1,3 +1,6 @@
+
+# Please check https://github.com/chandu0101/sri (this is where future work is going to take place)
+
 #scalajs-react-native
 ScalaJS wrapper for [react-native](https://facebook.github.io/react-native/) .This project depends on [scalajs-react](https://github.com/japgolly/scalajs-react) , so you must be familiar with scalajs-react in order to use this library.
 
