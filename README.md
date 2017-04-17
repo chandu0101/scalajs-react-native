@@ -1,20 +1,20 @@
 
 # Please check https://github.com/chandu0101/sri (this is where future work is going to take place)
 
-#scalajs-react-native
+# scalajs-react-native
 ScalaJS wrapper for [react-native](https://facebook.github.io/react-native/) .This project depends on [scalajs-react](https://github.com/japgolly/scalajs-react) , so you must be familiar with scalajs-react in order to use this library.
 
 ![movies](examples/images/movies.gif) 
 
 
-#Index 
+# Index 
 
 - [Setup](#setup)
 - [Styles](#styles)
 - [Examples](#examples)
 - [Project Template](#template)
 
-#Setup
+# Setup
 
 add this to your sbt build file
 
@@ -71,7 +71,7 @@ example :
 ```
 
 
-#Styles
+# Styles
 
 React Native doesn't implement CSS but instead relies on JavaScript to let you style your application. You can define styles in dynamic/typesafe way 
 
